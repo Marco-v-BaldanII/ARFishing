@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Unitilted.unity
     guid: 171b6f8ad9a0d1544b83af672ad54228
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SpaceTracking.unity
     guid: edb0654be1de364409ea0852e90b977a
   m_configObjects:
