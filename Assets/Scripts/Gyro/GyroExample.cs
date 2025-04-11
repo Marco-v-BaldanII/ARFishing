@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GyroManager : MonoBehaviour
@@ -6,41 +7,51 @@ public class GyroManager : MonoBehaviour
 
     public static GyroManager instance;
 
+    Quaternion device_rotation;
+
     private void Awake()
     {
         if(instance != null)
         {
-
+            Destroy(instance );
         }
+        instance = this;
+        DontDestroyOnLoad( instance );
     }
-
-    public Material mat;
 
     void Start()
     {
         gyro = Input.gyro;
-        gyro.enabled = true;
-        if (SystemInfo.supportsGyroscope)
-        {
-            gyro = Input.gyro;
-            gyro.enabled = true;
-            mat.color = Color.blue;
-        }
+        if (gyro == null) { print("Gyro not supported on this device"); Destroy(this.gameObject); }
         else
         {
-            print("Gyroscope not supported on this device.");
-            mat.color = Color.red;
+            gyro.enabled = true;
         }
+        //if (SystemInfo.supportsGyroscope)
+        //{
+        //    gyro = Input.gyro;
+        //    gyro.enabled = true;
+        //    mat.color = Color.blue;
+        //}
+        //else
+        //{
+        //    print("Gyroscope not supported on this device.");
+        //    mat.color = Color.red;
+        //}
     }
 
     void Update()
     {
         if (gyro != null)
         {
-            mat.color = Color.green;
-            Quaternion deviceRotation = gyro.attitude;
-            transform.rotation = deviceRotation;
+            device_rotation = gyro.attitude;
         }
     }
+
+    public Quaternion GetRotation()
+    {
+        return device_rotation;
+    }
+
 }
 
