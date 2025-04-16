@@ -7,6 +7,8 @@ public class GyroManager : MonoBehaviour
 
     public static GyroManager instance;
 
+    public GameObject noGyro;
+
     Quaternion device_rotation;
 
     private void Awake()
@@ -21,8 +23,11 @@ public class GyroManager : MonoBehaviour
 
     void Start()
     {
+        Input.gyro.enabled = true;
         gyro = Input.gyro;
-        if (gyro == null) { print("Gyro not supported on this device"); Destroy(this.gameObject); }
+        if (gyro == null || ! SystemInfo.supportsGyroscope) { print("Gyro not supported on this device");
+            noGyro.gameObject.SetActive(true);
+            Destroy(this.gameObject); }
         else
         {
             gyro.enabled = true;

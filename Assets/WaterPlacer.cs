@@ -29,7 +29,7 @@ public class WaterPlacer : MonoBehaviour
                 HandleRaycast(hit); 
             }
         }
-        print("RayCast Hit Nothing");
+
 
     }
 
@@ -38,12 +38,12 @@ public class WaterPlacer : MonoBehaviour
         if (hit.trackable is ARPlane plane)
         {
             print($"Hit a plane with alignment {plane.alignment}");
-
+            print("Hit a Floor");
+            Vector3 hitPosition = hit.pose.position;
+            Instantiate(WaterPrefab, hitPosition, Quaternion.identity);
             if (plane.alignment == UnityEngine.XR.ARSubsystems.PlaneAlignment.HorizontalUp)
             {
-                print("Hit a Floor");
-                Vector3 hitPosition = hit.pose.position;
-                Instantiate(WaterPrefab, hitPosition, Quaternion.identity);
+               
             }
         }
         else
