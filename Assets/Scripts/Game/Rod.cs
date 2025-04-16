@@ -11,12 +11,20 @@ public class Rod : MonoBehaviour
 
     Quaternion calibrationRotation;
     public Camera camera;
+    public Transform cameraOffset;
+
+    private void Start()
+    {
+        Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
+        transform.rotation = camera.transform.rotation * Quaternion.Euler(-eulers.x, -eulers.z, eulers.y);
+      //  cameraOffset.transform.LookAt(transform.position);
+    }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
-        transform.rotation = camera.transform.rotation * Quaternion.Euler(- eulers.x, eulers.z, eulers.y);
+        transform.rotation = camera.transform.rotation * Quaternion.Euler(- eulers.x, - eulers.z, eulers.y);
         //return;
         //transform.rotation = Quaternion.Euler(
         //    Mathf.Clamp(transform.rotation.eulerAngles.x, -limit_pitch, limit_pitch),
