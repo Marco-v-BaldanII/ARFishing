@@ -16,7 +16,7 @@ public class Rod : MonoBehaviour
     private void Start()
     {
         Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
-        transform.rotation = camera.transform.rotation * Quaternion.Euler(-eulers.x, -eulers.z, eulers.y);
+        transform.rotation = GyroManager.instance.GetRodRotation();
       //  cameraOffset.transform.LookAt(transform.position);
     }
 
@@ -24,7 +24,7 @@ public class Rod : MonoBehaviour
     void Update()
     {
         Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
-      //  print("Rod receives " + eulers + "from gyro");
+        //print("Rod receives " + eulers + "from gyro");
         transform.rotation = camera.transform.rotation * Quaternion.Euler(- eulers.x, - eulers.z, eulers.y);
 
     }
