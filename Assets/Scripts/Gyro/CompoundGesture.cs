@@ -9,7 +9,19 @@ public enum Rotation
     Yaw      // X
 }
 
+public struct DetectedRotation
+{
+    public Rotation rotation;
+    public float degrees;
+
+    public DetectedRotation(Rotation rotation, float degrees)
+    {
+        this.rotation = rotation;
+        this.degrees = degrees;
+    }
+}
+
 public class CompoundGesture 
 {
-    public Queue<Rotation> my_gesture;
+    public List<DetectedRotation> my_gesture;
 }
