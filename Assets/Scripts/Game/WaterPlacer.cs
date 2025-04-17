@@ -12,9 +12,11 @@ public class WaterPlacer : MonoBehaviour
 
     List<ARRaycastHit> m_Hits = new List<ARRaycastHit>();
 
+    bool waterPlaced = false;
+
     void Update()
     {
-        if (Input.touchCount == 0)
+        if (Input.touchCount == 0 || waterPlaced)
             return;
 
         Touch a_touch = Input.GetTouch(0);
@@ -41,6 +43,7 @@ public class WaterPlacer : MonoBehaviour
             print("Hit a Floor");
             Vector3 hitPosition = hit.pose.position;
             Instantiate(WaterPrefab, hitPosition, Quaternion.identity);
+            waterPlaced = true;
             if (plane.alignment == UnityEngine.XR.ARSubsystems.PlaneAlignment.HorizontalUp)
             {
                

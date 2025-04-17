@@ -43,6 +43,7 @@ public class Rod : MonoBehaviour
 
         hook_object.transform.localPosition = hook_pos;
         hook_object.useGravity = false; hook_object.velocity = Vector3.zero;
+        hook_object.transform.parent = transform;
 
     }
 
@@ -55,6 +56,7 @@ public class Rod : MonoBehaviour
     {
         hook_object.useGravity = true;
         hook_object.AddForce(transform.forward  * 4, ForceMode.Impulse);
+        hook_object.transform.parent = null;
     }
 
 }
