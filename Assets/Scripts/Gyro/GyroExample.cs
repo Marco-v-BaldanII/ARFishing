@@ -18,7 +18,7 @@ public class GyroManager : MonoBehaviour
 
     public Queue<DetectedRotation> detected_gestures;
     private float GESTURE_REFRESH_RATE = 0.3f;
-    private float COMPOUND_DETECTION_RATE = 0.9f;
+    private float COMPOUND_DETECTION_RATE = 0.2f;
 
 
     Vector3 device_rotation_buffer = Vector3.zero;
@@ -56,7 +56,7 @@ public class GyroManager : MonoBehaviour
         throwGesture.my_gesture.Add(new DetectedRotation( Rotation.Yaw,   15f));
 
         InvokeRepeating("DetectGestures", 0f, GESTURE_REFRESH_RATE);
-      //  InvokeRepeating("DetectCompoundGestures", 0f, COMPOUND_DETECTION_RATE);
+       InvokeRepeating("NonSuspectingGestureCheck", 0f, COMPOUND_DETECTION_RATE);
 
 
         //if (SystemInfo.supportsGyroscope)
@@ -170,5 +170,43 @@ public class GyroManager : MonoBehaviour
        
 
     }
+
+    public void NonSuspectingGestureCheck()
+    {
+        int index = 0;
+        Queue<DetectedRotation> detected = new Queue<DetectedRotation>(detected_gestures);
+        while (detected.Count > 0)
+        {
+            DetectedRotation rotation = detected.Dequeue();
+
+            // detected rotation == first rotation of the throw gesture
+            if (rotation.rotation == throwGesture.my_gesture[index].rotation)
+            {
+                if (throwGesture.my_gesture[index].degrees > 0 && rotation.degrees >= throwGesture.my_gesture[index].degrees)
+                {
+                    index++;
+                }
+                else if (throwGesture.my_gesture[index].degrees < 0 && rotation.degrees <= throwGesture.my_gesture[index].degrees)
+                {
+                    index++;
+                }
+
+                if (index == throwGesture.my_gesture.Count)
+                {
+                    print("Throw gesture identified ");
+                    detected_gestures.Clear();
+                    break;
+                }
+            }
+
+
+        }
+
+        if (index != 2)
+        {
+            //print("NOT Throw");
+        }
+    }
+
 }
 
