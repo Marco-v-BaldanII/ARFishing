@@ -44,6 +44,7 @@ public class Rod : MonoBehaviour
         hook_object.transform.localPosition = hook_pos;
         hook_object.useGravity = false; hook_object.velocity = Vector3.zero;
         hook_object.transform.parent = transform;
+        hook_object.GetComponent<Collider>().enabled = false;
 
     }
 
@@ -54,6 +55,8 @@ public class Rod : MonoBehaviour
 
     public void ThrowRod()
     {
+        hook_object.GetComponent<Collider>().enabled = true;
+
         hook_object.useGravity = true;
         hook_object.AddForce(transform.forward  * 4, ForceMode.Impulse);
         hook_object.transform.parent = null;

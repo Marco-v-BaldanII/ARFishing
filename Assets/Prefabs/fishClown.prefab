@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 2600746035955885558}
   - component: {fileID: 5706088670552224910}
   - component: {fileID: 8110568736327582969}
-  - component: {fileID: 577980446122898093}
   m_Layer: 0
   m_Name: WanderSphere
   m_TagString: Untagged
@@ -212,27 +211,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &577980446122898093
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3439920700445255638}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3597920586451640853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,6 +323,34 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7222321646071973263}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3464573025350456444}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 200511642556521379}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6809049885256297612}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3816770128545224011}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2252057007167168322}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5401606368433465962}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5802423439239607354}
   m_SourcePrefab: {fileID: 100100000, guid: 8210c2832cbb43447b5d2663bfa70223, type: 3}
 --- !u!4 &3919495931560363518 stripped
 Transform:
@@ -456,8 +462,8 @@ MonoBehaviour:
   title: Wander
   rect:
     serializedVersion: 2
-    x: 120
-    y: 360
+    x: 316.8
+    y: 302.4
     width: 160
     height: 44
   parent: {fileID: 1274549380262533990}
@@ -466,12 +472,11 @@ MonoBehaviour:
   runtimePriority: 0
   breakpoint: 0
   wanderRadius: 2
-  wanderDistance: 5
+  wanderDistance: 1.5
   wanderJitter: 1
-  movementSpeed: 2
-  wander_shpere: {fileID: 0}
-  angle: 0
-  home: {fileID: 0}
+  movementSpeed: 0.2
+  wander_shpere: {fileID: 3439920700445255638}
+  angle: 360
 --- !u!114 &1274549380262533990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,12 +492,14 @@ MonoBehaviour:
   title: Selector
   rect:
     serializedVersion: 2
-    x: 200
-    y: 240
+    x: 120
+    y: 160
     width: 160
     height: 44
   parent: {fileID: 3091739190359034412}
   children:
+  - {fileID: 3816770128545224011}
+  - {fileID: 3464573025350456444}
   - {fileID: 2700053628044126865}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
@@ -532,3 +539,185 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monoBehaviourTree: {fileID: 9040297984350565773}
+--- !u!114 &3464573025350456444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700793a9b1e36324dbf88c4bea99b764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: DetectTarget
+  rect:
+    serializedVersion: 2
+    x: 140
+    y: 260
+    width: 160
+    height: 44
+  parent: {fileID: 1274549380262533990}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 1073741863
+--- !u!114 &200511642556521379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2217e4d35c0c94ea02cf2166c17e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variables:
+  - {fileID: 6809049885256297612}
+  masterBlackboard: {fileID: 0}
+--- !u!114 &6809049885256297612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc98ff6538275b4c9a8383882546ee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: target
+  val: {fileID: 0}
+--- !u!114 &3816770128545224011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: -60
+    y: 240
+    width: 160
+    height: 44
+  parent: {fileID: 1274549380262533990}
+  children:
+  - {fileID: 5802423439239607354}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 0
+  type: 2
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 200511642556521379}
+    key: target
+    constantValue: {fileID: 0}
+--- !u!114 &2252057007167168322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70666a8e17bfedf4c836c564943b103d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Pursuit
+  rect:
+    serializedVersion: 2
+    x: -180
+    y: 440
+    width: 160
+    height: 44
+  parent: {fileID: 5802423439239607354}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  rigid: {fileID: 7070007261413359286}
+  slowDownRadius: 0.5
+  targetPos: {x: 0, y: 0, z: 0}
+  targetVarName: target
+  speed: 2
+--- !u!114 &5401606368433465962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384baf0db8225ee4a9cded5c03845fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Bite
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 420
+    width: 160
+    height: 44
+  parent: {fileID: 5802423439239607354}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+--- !u!114 &5802423439239607354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08540605df275034fafc8e05c6704214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Selector
+  rect:
+    serializedVersion: 2
+    x: -80
+    y: 320
+    width: 160
+    height: 44
+  parent: {fileID: 3816770128545224011}
+  children:
+  - {fileID: 2252057007167168322}
+  - {fileID: 5401606368433465962}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  random: 0
