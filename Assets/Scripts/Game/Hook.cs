@@ -17,8 +17,17 @@ public class Hook : MonoBehaviour
     }
 
     bool bitten = false;
+    bool deviating_direction = true;
     Vector3 perpendicularCounterClockwise;
     Vector3 perpendicularClockwise;
+
+    private Direction direction = Direction.None;
+
+    private void Start()
+    {
+        GyroManager.instance.steer_left_event.AddListener(RedirectFishLeft);
+        GyroManager.instance.steer_right_event.AddListener(RedirectFishRight);
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,7 +38,7 @@ public class Hook : MonoBehaviour
 
             // 90 degrees counter-clockwise rotation around the global Y-axis
              
-            Debug.DrawLine(transform.position, perpendicularCounterClockwise * 10, Color.green);
+            //Debug.DrawLine(transform.position, perpendicularCounterClockwise * 10, Color.green);
 
             // 90 degrees clockwise rotation around the global Y-axis
             
@@ -37,21 +46,37 @@ public class Hook : MonoBehaviour
         }
     }
 
+    private void SetVelocityToRod()
+    {
+        rigid.velocity = (fishing_rod.transform.position - transform.position).normalized * 0.5f;
+        rigid.velocity = new Vector3(rigid.velocity.x, 0, rigid.velocity.z);
+    }
+
     private IEnumerator AttemptBreakFree()
     {
-        rigid.velocity = (fishing_rod.transform.position - transform.position).normalized * 0.2f;
-        rigid.velocity = new Vector3(rigid.velocity.x, 0, rigid.velocity.z);
+        SetVelocityToRod();
 
         while (bitten)
         {
-            yield return null;
-            perpendicularCounterClockwise = new Vector3(-rigid.velocity.z, rigid.velocity.y, rigid.velocity.x).normalized;
-            rigid.velocity = perpendicularCounterClockwise.normalized * 0.2f;
-           // rigid.velocity  = Quaternion.AngleAxis(90, transform.up) * rigid.velocity;
+            yield return new WaitForSeconds(Random.Range(0.6f, 2.5f));
+
+            int id = Random.Range(0, 1);
+            Vector3 velocity;
+            if(id == 0) { velocity = new Vector3(-rigid.velocity.z, rigid.velocity.y, rigid.velocity.x).normalized; direction = Direction.Left; }
+            else { velocity =  new Vector3(rigid.velocity.z, rigid.velocity.y, -rigid.velocity.x).normalized; direction = Direction.Right; }
+
+            rigid.velocity = velocity * 0.2f;
+
             break;
+            // yield return null;
+            // perpendicularCounterClockwise = new Vector3(-rigid.velocity.z, rigid.velocity.y, rigid.velocity.x).normalized;
+            // rigid.velocity = perpendicularCounterClockwise.normalized * 0.2f;
+            //// rigid.velocity  = Quaternion.AngleAxis(90, transform.up) * rigid.velocity;
+            // break;
 
         }
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -73,6 +98,31 @@ public class Hook : MonoBehaviour
         }
     }
 
+    public void RedirectFishLeft()
+    {
+        if(direction == Direction.Left)
+        {
+            print("succesfully redirected fisssh");
+            SetVelocityToRod();
+            StartCoroutine(AttemptBreakFree());
+        }
+    }
 
+    public void RedirectFishRight()
+    {
+        if (direction == Direction.Right)
+        {
+            print("succesfully redirected fisssh");
+            SetVelocityToRod();
+            StartCoroutine(AttemptBreakFree());
+        }
+    }
 
+}
+
+public enum Direction
+{
+    Left,
+    Right,
+    None
 }

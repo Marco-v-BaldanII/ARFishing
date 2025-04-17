@@ -1265,7 +1265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1635520815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,13 +1273,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635520814}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fa707a3e96cfa1459c9b055ff5b1e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numFish: 5
-  spawn_zone_width: 4
+  numFish: 1
+  spawn_zone_width: 3
   fish_prefabs:
   - {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73, type: 3}
   fish_list: []
