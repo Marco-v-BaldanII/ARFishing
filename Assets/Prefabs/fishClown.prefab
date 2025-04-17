@@ -65,7 +65,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1
+  far clip plane: 2
   field of view: 134
   orthographic: 0
   orthographic size: 5
@@ -274,6 +274,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fishClown
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      propertyPath: m_TagString
+      value: Fish
+      objectReference: {fileID: 0}
     - target: {fileID: 3075172485645932368, guid: 8210c2832cbb43447b5d2663bfa70223,
         type: 3}
       propertyPath: m_Name
@@ -391,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 2700053628044126865}
+  selectedEditorNode: {fileID: 2252057007167168322}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -666,7 +671,7 @@ MonoBehaviour:
   runtimePriority: 0
   breakpoint: 0
   rigid: {fileID: 7070007261413359286}
-  slowDownRadius: 0.5
+  slowDownRadius: 0.1
   targetPos: {x: 0, y: 0, z: 0}
   targetVarName: target
   speed: 2

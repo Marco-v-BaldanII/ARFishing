@@ -29,6 +29,13 @@ public class Rod : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            GyroManager.instance.throw_event?.Invoke();
+        }
+
+
         Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
         //print("Rod receives " + eulers + "from gyro");
         transform.rotation = camera.transform.rotation * Quaternion.Euler(- eulers.x, - eulers.z, eulers.y);

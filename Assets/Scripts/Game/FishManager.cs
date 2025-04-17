@@ -17,7 +17,7 @@ public class FishManager : MonoBehaviour
         {
             fish_list.Add (Instantiate(fish_prefabs[Random.Range(0, fish_prefabs.Length)]) );
             Vector3 pos = Random.insideUnitSphere * spawn_zone_width;
-            pos.y = Random.Range(-0.4f, -1f);
+            pos.y = 0;
             fish_list[fish_list.Count - 1].transform.position = pos;
         }
     }

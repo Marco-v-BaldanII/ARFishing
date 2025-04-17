@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum Rotation
 {
@@ -24,4 +25,6 @@ public struct DetectedRotation
 public class CompoundGesture 
 {
     public List<DetectedRotation> my_gesture;
+    public UnityEvent _event;
+    public string name;
 }

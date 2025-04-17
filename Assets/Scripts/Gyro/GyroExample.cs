@@ -14,6 +14,8 @@ public class GyroManager : MonoBehaviour
     Quaternion device_rotation;
 
     public CompoundGesture throwGesture;
+    public CompoundGesture PitchGesture;
+    public CompoundGesture NegativePitchGesture;
 
     float timer_to_refresh = 0.4f;
 
@@ -21,12 +23,16 @@ public class GyroManager : MonoBehaviour
     private float GESTURE_REFRESH_RATE = 0.3f;
     private float COMPOUND_DETECTION_RATE = 0.2f;
 
+    public List<CompoundGesture> compoundGestures;
+
 
     Vector3 device_rotation_buffer = Vector3.zero;
 
     private float DEGREES_DETECTION_THRESHOLD = 15f;
 
     public UnityEvent throw_event;
+    public UnityEvent steer_left_event;
+    public UnityEvent steer_right_event;
 
     private void Awake()
     {
@@ -40,6 +46,7 @@ public class GyroManager : MonoBehaviour
 
     void Start()
     {
+        compoundGestures = new List<CompoundGesture>();
         Input.gyro.enabled = true;
         gyro = Input.gyro;
         if (gyro == null || ! SystemInfo.supportsGyroscope) { print("Gyro not supported on this device");
@@ -57,22 +64,26 @@ public class GyroManager : MonoBehaviour
         throwGesture.my_gesture = new List<DetectedRotation>();
         throwGesture.my_gesture.Add(new DetectedRotation( Rotation.Yaw , -15f));
         throwGesture.my_gesture.Add(new DetectedRotation( Rotation.Yaw,   15f));
+        throwGesture._event = throw_event;
+        throwGesture.name = "throw";
+
+        PitchGesture = new CompoundGesture();
+        PitchGesture.my_gesture = new List<DetectedRotation>();
+        PitchGesture.my_gesture.Add(new DetectedRotation(Rotation.Pitch, -20f));
+        PitchGesture._event = steer_left_event;
+        PitchGesture.name = "steer_left";
+
+        NegativePitchGesture = new CompoundGesture();
+        NegativePitchGesture.my_gesture= new List<DetectedRotation>();
+        NegativePitchGesture.my_gesture.Add(new DetectedRotation(Rotation.Pitch, 20f));
+        NegativePitchGesture._event = steer_right_event;
+        NegativePitchGesture.name = "steer_right";
+
+
+        compoundGestures.Add(throwGesture); compoundGestures.Add(PitchGesture); compoundGestures.Add(NegativePitchGesture);
 
         InvokeRepeating("DetectGestures", 0f, GESTURE_REFRESH_RATE);
        InvokeRepeating("NonSuspectingGestureCheck", 0f, COMPOUND_DETECTION_RATE);
-
-
-        //if (SystemInfo.supportsGyroscope)
-        //{
-        //    gyro = Input.gyro;
-        //    gyro.enabled = true;
-        //    mat.color = Color.blue;
-        //}
-        //else
-        //{
-        //    print("Gyroscope not supported on this device.");
-        //    mat.color = Color.red;
-        //}
     }
 
     void Update()
@@ -143,77 +154,70 @@ public class GyroManager : MonoBehaviour
 
     public void DetectCompoundGestures()
     {
-        int index = 0;
-        while (detected_gestures.Count > 0)
+        for (int j = 0; j < compoundGestures.Count; j++)
         {
-            DetectedRotation rotation = detected_gestures.Dequeue();
 
-            // detected rotation == first rotation of the throw gesture
-            if(rotation.rotation == throwGesture.my_gesture[index].rotation)
+            int index = 0;
+            while (detected_gestures.Count > 0)
             {
-                if(throwGesture.my_gesture[index].degrees > 0 && rotation.degrees >= throwGesture.my_gesture[index].degrees)
-                {
-                    index++;
-                }
-                else if (throwGesture.my_gesture[index].degrees < 0 && rotation.degrees <= throwGesture.my_gesture[index].degrees)
-                {
-                    index++;
-                }
+                DetectedRotation rotation = detected_gestures.Dequeue();
 
-                if (index == throwGesture.my_gesture.Count)
+                // detected rotation == first rotation of the throw gesture
+                if (rotation.rotation == compoundGestures[j].my_gesture[index].rotation)
                 {
-                    print("Throw gesture identified ");
-                    throw_event?.Invoke();
-                    break;
+                    if (compoundGestures[j].my_gesture[index].degrees > 0 && rotation.degrees >= compoundGestures[j].my_gesture[index].degrees)
+                    {
+                        index++;
+                    }
+                    else if (compoundGestures[j].my_gesture[index].degrees < 0 && rotation.degrees <= compoundGestures[j].my_gesture[index].degrees)
+                    {
+                        index++;
+                    }
+                    if (index == compoundGestures[j].my_gesture.Count)
+                    {
+                        print ( compoundGestures[j].name + " gesture identified ");
+                        compoundGestures[j]._event?.Invoke();
+                        break;
+                    }
                 }
             }
-            
-
+            if (index != 2)
+            {
+                print("NOT Throw");
+            }
         }
-
-        if(index != 2)
-        {
-            print("NOT Throw");
-        }
-       
-
     }
 
     public void NonSuspectingGestureCheck()
     {
-        int index = 0;
-        Queue<DetectedRotation> detected = new Queue<DetectedRotation>(detected_gestures);
-        while (detected.Count > 0)
+        for (int j = 0; j < compoundGestures.Count; j++)
         {
-            DetectedRotation rotation = detected.Dequeue();
-
-            // detected rotation == first rotation of the throw gesture
-            if (rotation.rotation == throwGesture.my_gesture[index].rotation)
+            int index = 0;
+            Queue<DetectedRotation> detected = new Queue<DetectedRotation>(detected_gestures);
+            while (detected.Count > 0)
             {
-                if (throwGesture.my_gesture[index].degrees > 0 && rotation.degrees >= throwGesture.my_gesture[index].degrees)
+                DetectedRotation rotation = detected.Dequeue();
+
+                // detected rotation == first rotation of the throw gesture
+                if (rotation.rotation == compoundGestures[j].my_gesture[index].rotation)
                 {
-                    index++;
-                }
-                else if (throwGesture.my_gesture[index].degrees < 0 && rotation.degrees <= throwGesture.my_gesture[index].degrees)
-                {
-                    index++;
+                    if (compoundGestures[j].my_gesture[index].degrees > 0 && rotation.degrees >= compoundGestures[j].my_gesture[index].degrees)
+                    {
+                        index++;
+                    }
+                    else if (compoundGestures[j].my_gesture[index].degrees < 0 && rotation.degrees <= compoundGestures[j].my_gesture[index].degrees)
+                    {
+                        index++;
+                    }
+                    if (index == compoundGestures[j].my_gesture.Count)
+                    {
+                        print(compoundGestures[j].name + " gesture identified ");
+                        compoundGestures[j]._event?.Invoke();
+                        break;
+                    }
                 }
 
-                if (index == throwGesture.my_gesture.Count)
-                {
-                    print("Throw gesture identified ");
-                    detected_gestures.Clear();
-                    throw_event?.Invoke();
-                    break;
-                }
             }
-
-
-        }
-
-        if (index != 2)
-        {
-            //print("NOT Throw");
         }
     }
 
