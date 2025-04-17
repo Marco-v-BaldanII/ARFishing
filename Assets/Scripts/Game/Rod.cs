@@ -24,12 +24,9 @@ public class Rod : MonoBehaviour
     void Update()
     {
         Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
+      //  print("Rod receives " + eulers + "from gyro");
         transform.rotation = camera.transform.rotation * Quaternion.Euler(- eulers.x, - eulers.z, eulers.y);
-        //return;
-        //transform.rotation = Quaternion.Euler(
-        //    Mathf.Clamp(transform.rotation.eulerAngles.x, -limit_pitch, limit_pitch),
-        //    Mathf.Clamp(transform.rotation.eulerAngles.x, -limit_pitch, limit_pitch),
-        //    Mathf.Clamp(transform.rotation.eulerAngles.x, -limit_pitch, limit_pitch));
+
     }
 
     public void Calibrate()
