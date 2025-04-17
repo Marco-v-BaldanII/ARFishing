@@ -9,14 +9,13 @@ public class Clownfish : Fish
         movementSpeed = 5f;
     }
 
-    void Start()
+    protected void Awake()
     {
-        
+        base.Awake();
     }
-
-    void Update()
+    protected void Update()
     {
-        
+        base.Update();
     }
 
     public override void Action()

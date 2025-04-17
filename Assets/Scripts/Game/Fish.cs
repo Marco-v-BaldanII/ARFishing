@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Species
 {
@@ -16,6 +17,8 @@ public abstract class Fish : MonoBehaviour
     protected float movementSpeed;
     protected Species species;
     protected int numberOfActions;
+    private Camera frustrum;
+    public LayerMask mask;
 
     public Fish(Species species)
     {
@@ -31,4 +34,44 @@ public abstract class Fish : MonoBehaviour
     {
         return species;
     }
+
+    protected void Awake()
+    {
+        frustrum = GetComponentInChildren<Camera>();
+        frustrum.enabled = false;  // Doesn't override viewport
+    }
+
+    protected void Update()
+    {
+        bool detect = false;
+        Transform detectTrasnform = null;
+
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, frustrum.farClipPlane, mask);
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(frustrum);
+        foreach (Collider col in colliders)
+        {
+            if (col.gameObject != gameObject && GeometryUtility.TestPlanesAABB(planes, col.bounds))
+            {
+                RaycastHit hit;
+                Ray ray = new Ray();
+                ray.origin = transform.position;
+                ray.direction = (col.transform.position - transform.position).normalized;
+                ray.origin = ray.GetPoint(frustrum.nearClipPlane);
+
+
+                if (Physics.Raycast(ray, out hit, frustrum.farClipPlane, mask))
+                {
+                    //targetTransform = hit.collider.transform;
+
+                    detectTrasnform = hit.collider.transform;
+                    print("Fish has a target");
+                    break;
+
+                }
+            }
+
+        }
+    }
+
 }

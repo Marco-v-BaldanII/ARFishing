@@ -80,6 +80,10 @@ public class GyroManager : MonoBehaviour
         if (gyro != null)
         {
             device_rotation = gyro.attitude;
+            if(gyro.enabled == false)
+            {
+                gyro.enabled = true;
+            }
         }
 
         timer_to_refresh -= Time.deltaTime;
