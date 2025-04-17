@@ -23,6 +23,9 @@ public class Hook : MonoBehaviour
 
     private Direction direction = Direction.None;
 
+    private float SPEED = 0.6f;
+    private Fish currentFish;
+
     private void Start()
     {
         GyroManager.instance.steer_left_event.AddListener(RedirectFishLeft);
@@ -48,7 +51,7 @@ public class Hook : MonoBehaviour
 
     private void SetVelocityToRod()
     {
-        rigid.velocity = (fishing_rod.transform.position - transform.position).normalized * 0.5f;
+        rigid.velocity = (fishing_rod.transform.position - transform.position).normalized * SPEED;
         rigid.velocity = new Vector3(rigid.velocity.x, 0, rigid.velocity.z);
     }
 
@@ -58,12 +61,14 @@ public class Hook : MonoBehaviour
 
         while (bitten)
         {
-            yield return new WaitForSeconds(Random.Range(0.6f, 2.5f));
+            yield return new WaitForSeconds(Random.Range(1.2f, 4.2f));
 
-            int id = Random.Range(0, 1);
+            int id = Random.Range(0, 2);
             Vector3 velocity;
             if(id == 0) { velocity = new Vector3(-rigid.velocity.z, rigid.velocity.y, rigid.velocity.x).normalized; direction = Direction.Left; }
             else { velocity =  new Vector3(rigid.velocity.z, rigid.velocity.y, -rigid.velocity.x).normalized; direction = Direction.Right; }
+
+            if (currentFish) { currentFish.ShowExclamationMark(true); }
 
             rigid.velocity = velocity * 0.2f;
 
@@ -95,6 +100,8 @@ public class Hook : MonoBehaviour
             rigid.useGravity = false;
             colllider.enabled = false;
             StartCoroutine(AttemptBreakFree());
+            Fish fish = other.gameObject.GetComponent<Fish>();
+            if (fish) { currentFish = fish; }   
         }
     }
 
@@ -103,6 +110,7 @@ public class Hook : MonoBehaviour
         if(direction == Direction.Left)
         {
             print("succesfully redirected fisssh");
+            if (currentFish) { currentFish.ShowExclamationMark(false); }
             SetVelocityToRod();
             StartCoroutine(AttemptBreakFree());
         }
@@ -113,6 +121,7 @@ public class Hook : MonoBehaviour
         if (direction == Direction.Right)
         {
             print("succesfully redirected fisssh");
+            if (currentFish) { currentFish.ShowExclamationMark(false); }
             SetVelocityToRod();
             StartCoroutine(AttemptBreakFree());
         }

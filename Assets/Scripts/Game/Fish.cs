@@ -20,6 +20,9 @@ public abstract class Fish : MonoBehaviour
     private Camera frustrum;
     public LayerMask mask;
 
+    // UI 
+    public GameObject exclamation_mark;
+
     public Fish(Species species)
     {
         this.species = species;
@@ -72,6 +75,13 @@ public abstract class Fish : MonoBehaviour
         //    }
 
         //}
+    }
+
+    // Called when the fish attempts to steer the rod
+    public void ShowExclamationMark(bool show)
+    {
+        // TODO , replace with tweening
+        exclamation_mark.SetActive(show);
     }
 
 }

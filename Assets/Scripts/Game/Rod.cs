@@ -65,7 +65,7 @@ public class Rod : MonoBehaviour
         hook_object.GetComponent<Collider>().enabled = true;
 
         hook_object.useGravity = true;
-        hook_object.AddForce(transform.forward  * 1, ForceMode.Impulse);
+        hook_object.AddForce(transform.forward  * 1.5f, ForceMode.Impulse);
         hook_object.transform.parent = null;
     }
 
