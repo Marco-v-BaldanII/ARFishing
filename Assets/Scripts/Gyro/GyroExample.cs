@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GyroManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class GyroManager : MonoBehaviour
     Vector3 device_rotation_buffer = Vector3.zero;
 
     private float DEGREES_DETECTION_THRESHOLD = 15f;
+
+    public UnityEvent throw_event;
 
     private void Awake()
     {
@@ -156,6 +159,7 @@ public class GyroManager : MonoBehaviour
                 if (index == throwGesture.my_gesture.Count)
                 {
                     print("Throw gesture identified ");
+                    throw_event?.Invoke();
                     break;
                 }
             }
@@ -195,6 +199,7 @@ public class GyroManager : MonoBehaviour
                 {
                     print("Throw gesture identified ");
                     detected_gestures.Clear();
+                    throw_event?.Invoke();
                     break;
                 }
             }
@@ -207,6 +212,7 @@ public class GyroManager : MonoBehaviour
             //print("NOT Throw");
         }
     }
+
 
 }
 
