@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,9 +31,14 @@ public class Hook : MonoBehaviour
     private float SPEED = 0.6f;
     public Fish currentFish;
 
+    public HookStateMachine machine;
+
+    public Transform point; // point where the hook is when on rod
+
     private void Start()
     {
-
+        machine = GetComponent<HookStateMachine>();
+        GyroManager.instance.pull_event.AddListener(ReelIn);
     }
 
     // Update is called once per frame
@@ -51,11 +57,7 @@ public class Hook : MonoBehaviour
             //Debug.DrawLine(transform.position, perpendicularClockwise * 10, Color.yellow);
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 launchDirection = fishing_rod.transform.forward + fishing_rod.transform.up * 0.5f;
-            rigid.velocity = launchDirection * launchVelocity;
-        }
+
 
     }
 
@@ -89,6 +91,17 @@ public class Hook : MonoBehaviour
             yield return new WaitForFixedUpdate(); // Wait for the next physics update
         }
     }
+
+
+    public void ReelIn()
+    {
+        if(machine.checkState != State.ON_ROD && machine.checkState != State.THROWN)
+        {
+          var distance = Vector3.Distance(transform.position, point.position);
+          transform.DOMove(point.transform.position, 0.15f * distance).OnComplete(() => machine.OnChildTransitionEvent(State.ON_ROD));
+        }
+    }
+
 }
 
 public enum Direction

@@ -1,6 +1,4 @@
-using Codice.CM.Common;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class InWaterState : IState
@@ -30,7 +28,9 @@ public class InWaterState : IState
             collider.enabled = false;
            // StartCoroutine(AttemptBreakFree());
             Fish fish = other.gameObject.GetComponent<Fish>();
-            if (fish) { hook.currentFish = fish; }
+            if (fish) { 
+                hook.currentFish = fish; 
+            }
 
             // Bit by fish -> transition to bitten state
             CallTransition(State.BITTEN, this);

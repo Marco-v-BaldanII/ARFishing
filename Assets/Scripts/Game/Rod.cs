@@ -17,6 +17,8 @@ public class Rod : MonoBehaviour
     private Vector3 hook_pos;
     HookStateMachine machine;
 
+
+
     private void Start()
     {
         Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
@@ -26,6 +28,7 @@ public class Rod : MonoBehaviour
         GyroManager.instance.throw_event.AddListener(ThrowRod);
         hook_pos = hook_object.transform.localPosition;
         machine = hook_object.GetComponent<HookStateMachine>();
+
     }
 
     // Update is called once per frame
@@ -38,9 +41,13 @@ public class Rod : MonoBehaviour
         }
 
 
-        Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
+            
+
+
+            Vector3 eulers = GyroManager.instance.GetRotation().eulerAngles;
         //print("Rod receives " + eulers + "from gyro");
-        transform.rotation = camera.transform.rotation * Quaternion.Euler(- eulers.x, - eulers.z, eulers.y);
+        //transform.rotation = camera.transform.rotation * Quaternion.Euler(- eulers.x, - eulers.z, eulers.y);
+        transform.rotation = GyroManager.instance.GetRodRotation();
 
         Debug.DrawLine(transform.position, transform.forward * 10, Color.blue);
 
@@ -50,7 +57,9 @@ public class Rod : MonoBehaviour
         Touch a_touch = Input.GetTouch(0);
         if (a_touch.phase != TouchPhase.Ended) { return; }
 
-        machine.OnChildTransitionEvent(State.ON_ROD);
+        GyroManager.instance.Recalibrate();
+
+        //machine.OnChildTransitionEvent(State.ON_ROD);
 
     }
 
@@ -61,7 +70,10 @@ public class Rod : MonoBehaviour
 
     public void ThrowRod()
     {
-        machine.OnChildTransitionEvent(State.THROWN);
+        if (machine.checkState == State.ON_ROD)
+        {
+            machine.OnChildTransitionEvent(State.THROWN);
+        }
     }
 
 }

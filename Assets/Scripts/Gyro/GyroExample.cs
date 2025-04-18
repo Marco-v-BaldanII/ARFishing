@@ -16,6 +16,7 @@ public class GyroManager : MonoBehaviour
     public CompoundGesture throwGesture;
     public CompoundGesture PitchGesture;
     public CompoundGesture NegativePitchGesture;
+    public CompoundGesture PullGesture;
 
     float timer_to_refresh = 0.4f;
 
@@ -33,7 +34,10 @@ public class GyroManager : MonoBehaviour
     public UnityEvent throw_event;
     public UnityEvent steer_left_event;
     public UnityEvent steer_right_event;
+    public UnityEvent pull_event;
 
+
+    private Quaternion gyroOffset = Quaternion.identity;
     private void Awake()
     {
         if(instance != null)
@@ -79,8 +83,12 @@ public class GyroManager : MonoBehaviour
         NegativePitchGesture._event = steer_right_event;
         NegativePitchGesture.name = "steer_right";
 
+        PullGesture = new CompoundGesture();
+        PullGesture.my_gesture = new List<DetectedRotation> { new DetectedRotation(Rotation.Yaw , -20f) };
+        PullGesture._event = pull_event;
+        PullGesture.name = "pull_event";
 
-        compoundGestures.Add(throwGesture); compoundGestures.Add(PitchGesture); compoundGestures.Add(NegativePitchGesture);
+        compoundGestures.Add(throwGesture); compoundGestures.Add(PitchGesture); compoundGestures.Add(NegativePitchGesture); compoundGestures.Add(PullGesture);
 
         InvokeRepeating("DetectGestures", 0f, GESTURE_REFRESH_RATE);
        InvokeRepeating("NonSuspectingGestureCheck", 0f, COMPOUND_DETECTION_RATE);
@@ -90,7 +98,7 @@ public class GyroManager : MonoBehaviour
     {
         if (gyro != null)
         {
-            device_rotation = gyro.attitude;
+            device_rotation = gyroOffset * gyro.attitude ;
             if(gyro.enabled == false)
             {
                 gyro.enabled = true;
@@ -119,6 +127,7 @@ public class GyroManager : MonoBehaviour
 
     public void DetectGestures()
     {
+        //Vector3 current_rotation = gyro.attitude.eulerAngles;
         Vector3 current_rotation = GetRodRotation().eulerAngles;
         Vector3 subtraction = new Vector3( /* DeltaAngle returns the shortest distance between 2 angles. ex: DeltaAngle(355 , 5) = 10 */
             Mathf.DeltaAngle(device_rotation_buffer.x, current_rotation.x),
@@ -148,7 +157,7 @@ public class GyroManager : MonoBehaviour
             refresh_timer = true;
         }
         if (refresh_timer) { timer_to_refresh = 0.9f; }
-        device_rotation_buffer = GetRodRotation().eulerAngles;
+        device_rotation_buffer = current_rotation;
     }
 
 
@@ -177,6 +186,7 @@ public class GyroManager : MonoBehaviour
                     {
                         print ( compoundGestures[j].name + " gesture identified ");
                         compoundGestures[j]._event?.Invoke();
+                        if(j == 0) detected_gestures.Clear();
                         break;
                     }
                 }
@@ -213,6 +223,7 @@ public class GyroManager : MonoBehaviour
                     {
                         print(compoundGestures[j].name + " gesture identified ");
                         compoundGestures[j]._event?.Invoke();
+                        if (j == 0) detected_gestures.Clear();
                         break;
                     }
                 }
@@ -221,6 +232,11 @@ public class GyroManager : MonoBehaviour
         }
     }
 
+    public void Recalibrate()
+    {
+        gyroOffset = Quaternion.Inverse(gyro.attitude);
+        detected_gestures.Clear();
+    }
 
 }
 

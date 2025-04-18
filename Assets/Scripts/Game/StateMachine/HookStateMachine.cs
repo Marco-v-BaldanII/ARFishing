@@ -17,7 +17,7 @@ public class HookStateMachine : MonoBehaviour
 
     public Hook pablo;
 
-    [SerializeField] State checkState;
+    public State checkState;
 
     bool initialized = false;
 

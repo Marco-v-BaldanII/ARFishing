@@ -1,6 +1,4 @@
-using log4net.Util;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class OnRodState : IState
@@ -15,7 +13,7 @@ public class OnRodState : IState
         hook = pablo;
         fishing_rod = hook.fishing_rod;
         rigid = pablo.GetComponent<Rigidbody>();
-        hook_pos = hook.transform.localPosition;
+        hook_pos = hook.point.position;
     }
 
     public override void Enter()
@@ -27,6 +25,13 @@ public class OnRodState : IState
 
         // Solve glitch
         hook.fishManager.ResetAllTargets();
+    }
+
+
+    public override void Process()
+    {
+        hook_pos = hook.point.position;
+        hook.transform.position = hook_pos;
     }
 
 }

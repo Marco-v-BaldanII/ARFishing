@@ -44,12 +44,19 @@ public class MBT_DetectHook : Leaf
                 {
 
                 }
-                else { return NodeResult.failure ; }
+                else { 
+                    return NodeResult.failure ; 
+                }
 
 
                 if (Physics.Raycast(ray, out hit, frustum.farClipPlane, mask))
                 {
                     print("Fish has target");
+
+                    if(hit.collider.gameObject.GetComponent<Hook>() == null)
+                    {
+                        return NodeResult.failure ;
+                    }
 
                     detectTrasnform = hit.collider.transform;
                     break;
