@@ -71,7 +71,7 @@ public class BittenState : IState
 
     }
 
-    public async void RedirectFishLeft()
+    public async void RedirectFishLeft(float degrees)
     {
         if (direction == Direction.Left)
         {
@@ -92,7 +92,7 @@ public class BittenState : IState
         }
     }
 
-    public async void RedirectFishRight()
+    public async void RedirectFishRight(float degrees)
     {
         if (direction == Direction.Right)
         {

@@ -25,6 +25,6 @@ public struct DetectedRotation
 public class CompoundGesture 
 {
     public List<DetectedRotation> my_gesture;
-    public UnityEvent _event;
+    public UnityEvent<float> _event;
     public string name;
 }

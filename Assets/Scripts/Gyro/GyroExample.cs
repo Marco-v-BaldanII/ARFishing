@@ -22,7 +22,7 @@ public class GyroManager : MonoBehaviour
 
     public Queue<DetectedRotation> detected_gestures;
     private float GESTURE_REFRESH_RATE = 0.3f;
-    private float COMPOUND_DETECTION_RATE = 0.2f;
+    private float COMPOUND_DETECTION_RATE = 0.05f;
 
     public List<CompoundGesture> compoundGestures;
 
@@ -31,10 +31,10 @@ public class GyroManager : MonoBehaviour
 
     private float DEGREES_DETECTION_THRESHOLD = 15f;
 
-    public UnityEvent throw_event;
-    public UnityEvent steer_left_event;
-    public UnityEvent steer_right_event;
-    public UnityEvent pull_event;
+    public UnityEvent<float> throw_event;
+    public UnityEvent<float> steer_left_event;
+    public UnityEvent<float> steer_right_event;
+    public UnityEvent<float> pull_event;
 
 
     private Quaternion gyroOffset = Quaternion.identity;
@@ -66,8 +66,8 @@ public class GyroManager : MonoBehaviour
         // Throw rod gesture configuration
         throwGesture = new CompoundGesture();
         throwGesture.my_gesture = new List<DetectedRotation>();
-        throwGesture.my_gesture.Add(new DetectedRotation( Rotation.Yaw , -15f));
-        throwGesture.my_gesture.Add(new DetectedRotation( Rotation.Yaw,   15f));
+        throwGesture.my_gesture.Add(new DetectedRotation( Rotation.Yaw , -9f));
+        throwGesture.my_gesture.Add(new DetectedRotation( Rotation.Yaw,   6f));
         throwGesture._event = throw_event;
         throwGesture.name = "throw";
 
@@ -185,7 +185,7 @@ public class GyroManager : MonoBehaviour
                     if (index == compoundGestures[j].my_gesture.Count)
                     {
                         print ( compoundGestures[j].name + " gesture identified ");
-                        compoundGestures[j]._event?.Invoke();
+                        compoundGestures[j]._event?.Invoke(rotation.degrees);
                         if(j == 0) detected_gestures.Clear();
                         break;
                     }
@@ -222,7 +222,7 @@ public class GyroManager : MonoBehaviour
                     if (index == compoundGestures[j].my_gesture.Count)
                     {
                         print(compoundGestures[j].name + " gesture identified ");
-                        compoundGestures[j]._event?.Invoke();
+                        compoundGestures[j]._event?.Invoke(rotation.degrees);
                         if (j == 0) detected_gestures.Clear();
                         break;
                     }

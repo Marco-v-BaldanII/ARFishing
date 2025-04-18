@@ -17,6 +17,7 @@ public class Rod : MonoBehaviour
     private Vector3 hook_pos;
     HookStateMachine machine;
 
+    private Hook hook;
 
 
     private void Start()
@@ -28,7 +29,7 @@ public class Rod : MonoBehaviour
         GyroManager.instance.throw_event.AddListener(ThrowRod);
         hook_pos = hook_object.transform.localPosition;
         machine = hook_object.GetComponent<HookStateMachine>();
-
+        hook = hook_object.GetComponent<Hook>();
     }
 
     // Update is called once per frame
@@ -37,7 +38,7 @@ public class Rod : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A)) // manual debug method for throwing hook
         {
-            GyroManager.instance.throw_event?.Invoke();
+            GyroManager.instance.throw_event?.Invoke(20);
         }
 
 
@@ -68,8 +69,14 @@ public class Rod : MonoBehaviour
         calibrationRotation = Quaternion.Inverse(GyroManager.instance.GetRotation());
     }
 
-    public void ThrowRod()
+
+
+    public void ThrowRod(float degrees)
     {
+
+        hook.launchVelocity = degrees / 6.666f;
+        print("Force of launch is " + hook.launchVelocity);
+
         if (machine.checkState == State.ON_ROD)
         {
             machine.OnChildTransitionEvent(State.THROWN);

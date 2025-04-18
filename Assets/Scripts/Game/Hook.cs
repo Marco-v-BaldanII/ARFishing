@@ -93,7 +93,7 @@ public class Hook : MonoBehaviour
     }
 
 
-    public void ReelIn()
+    public void ReelIn(float degrees)
     {
         if(machine.checkState != State.ON_ROD && machine.checkState != State.THROWN)
         {
