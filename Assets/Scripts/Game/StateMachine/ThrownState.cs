@@ -7,22 +7,30 @@ public class ThrownState : IState
 {
     Hook hook;
     Rigidbody rigid;
-    Collider collider;
+    BoxCollider collider;
     public ThrownState(Hook pablo)
     {
         hook = pablo;
         rigid = hook.GetComponent<Rigidbody>();
-        collider = hook.GetComponent<Collider>();
+        collider = hook.GetComponent<BoxCollider>();
     }
 
     public override void Enter() {
 
+        rigid.velocity = Vector3.zero;
+
         collider.enabled = true;
 
         rigid.useGravity = true;
-        rigid.AddForce(hook.fishing_rod.transform.forward * 1.5f, ForceMode.Impulse);
+        Vector3 launchDirection = hook.fishing_rod.transform.forward + hook.fishing_rod.transform.up * 0.5f;
+        rigid.velocity = launchDirection * hook.launchVelocity;
         rigid.transform.parent = null;
 
+    }
+
+    public override void Process()
+    {
+        Debug.Log("Velocity is " + rigid.velocity);
     }
 
     public override void OnBodyEnter(Collider collision) 
@@ -33,5 +41,7 @@ public class ThrownState : IState
             CallTransition(State.IN_WATER, this);
         }
     }
+
+
 
 }

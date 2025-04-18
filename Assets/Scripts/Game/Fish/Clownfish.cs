@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Clownfish : Fish
 {
+
+
     public Clownfish() : base(Species.CLOWNNFISH)
     {
         movementSpeed = 5f;

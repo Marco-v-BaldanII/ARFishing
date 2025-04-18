@@ -33,14 +33,13 @@ public class MBT_DetectHook : Leaf
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(frustum);
         foreach (Collider col in colliders)
         {
-            if (col.CompareTag("Hook") && GeometryUtility.TestPlanesAABB(planes, col.bounds))
+            if (col.CompareTag("Hook") && col.isTrigger == false && GeometryUtility.TestPlanesAABB(planes, col.bounds))
             {
                 RaycastHit hit;
                 Ray ray = new Ray();
                 ray.origin = transform.position;
                 ray.direction = (col.transform.position - transform.position).normalized;
                 ray.origin = ray.GetPoint(frustum.nearClipPlane);
-
 
 
                 if (Physics.Raycast(ray, out hit, frustum.farClipPlane, mask))

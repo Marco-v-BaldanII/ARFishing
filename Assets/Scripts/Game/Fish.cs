@@ -22,6 +22,7 @@ public abstract class Fish : MonoBehaviour
 
     // UI 
     public GameObject exclamation_mark;
+    public GameObject particles;
 
     public Fish(Species species)
     {
@@ -82,6 +83,17 @@ public abstract class Fish : MonoBehaviour
     {
         // TODO , replace with tweening
         exclamation_mark.SetActive(show);
+    }
+
+    public void ShowParticles()
+    {
+        particles.SetActive(true);
+        Invoke("DeactivateParticles", 0.85f);
+
+    }
+    private void DeactivateParticles()
+    {
+        particles.SetActive(false);
     }
 
 }

@@ -8,6 +8,8 @@ public class Hook : MonoBehaviour
     public Rod fishing_rod;
     private Collider colllider;
 
+    public float launchVelocity = 3f;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -53,6 +55,7 @@ public class Hook : MonoBehaviour
     {
         rigid.velocity = (fishing_rod.transform.position - transform.position).normalized * SPEED;
         rigid.velocity = new Vector3(rigid.velocity.x, 0, rigid.velocity.z);
+        // activate sparkle
     }
 
 

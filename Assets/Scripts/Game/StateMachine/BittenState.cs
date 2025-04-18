@@ -65,7 +65,7 @@ public class BittenState : IState
         if (direction == Direction.Left)
         {
             Debug.Log("succesfully redirected fisssh");
-            if (current_fish) { current_fish.ShowExclamationMark(false); }
+            if (current_fish) { current_fish.ShowExclamationMark(false); current_fish.ShowParticles(); }
             hook.SetVelocityToRod();
             try
             {
@@ -83,7 +83,7 @@ public class BittenState : IState
         if (direction == Direction.Right)
         {
             Debug.Log("succesfully redirected fisssh");
-            if (current_fish) { current_fish.ShowExclamationMark(false); }
+            if (current_fish) { current_fish.ShowExclamationMark(false); current_fish.ShowParticles(); }
             hook.SetVelocityToRod();
             try
             {
@@ -96,5 +96,15 @@ public class BittenState : IState
         }
     }
 
+    public override void OnAreaEnter(Collider collision)
+    {
+        if (collision.CompareTag("Rod"))
+        {
+            // Fish catched
+
+            GameObject.Destroy(hook.currentFish.gameObject);
+            CallTransition(State.ON_ROD, this);
+        }
+    }
 
 }
