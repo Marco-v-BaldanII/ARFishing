@@ -14,6 +14,9 @@ public class OnRodState : IState
         fishing_rod = hook.fishing_rod;
         rigid = pablo.GetComponent<Rigidbody>();
         hook_pos = hook.point.position;
+
+        hook.fishManager = GameObject.Find("FishManager").GetComponent<FishManager>();
+
     }
 
     public override void Enter()

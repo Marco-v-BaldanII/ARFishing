@@ -12,7 +12,11 @@ public class WaterPlacer : MonoBehaviour
 
     List<ARRaycastHit> m_Hits = new List<ARRaycastHit>();
 
+    public Rod fishing_rod;
+
     bool waterPlaced = false;
+
+    public GameObject waterPanel;
 
     void Update()
     {
@@ -44,6 +48,9 @@ public class WaterPlacer : MonoBehaviour
             Vector3 hitPosition = hit.pose.position;
             Instantiate(WaterPrefab, hitPosition, Quaternion.identity);
             waterPlaced = true;
+            fishing_rod.gameObject.SetActive(true);
+            waterPanel.SetActive(false);
+
             if (plane.alignment == UnityEngine.XR.ARSubsystems.PlaneAlignment.HorizontalUp)
             {
                
