@@ -26,7 +26,7 @@ public class ThrownState : IState
         rigid.velocity = launchDirection * hook.launchVelocity;
         rigid.transform.parent = null;
 
-       // hook.StartLaunchRoutine();
+        hook.currentFish = null;
 
     }
 

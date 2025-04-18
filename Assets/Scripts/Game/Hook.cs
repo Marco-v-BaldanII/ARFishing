@@ -8,6 +8,8 @@ public class Hook : MonoBehaviour
     public Rod fishing_rod;
     private Collider colllider;
 
+    public FishManager fishManager;
+
     public float launchVelocity = 3f;
 
     // Start is called before the first frame update

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using UnityEngine.AI;
 using MBT;
 
 [AddComponentMenu("")]
@@ -40,6 +38,13 @@ public class MBT_DetectHook : Leaf
                 ray.origin = transform.position;
                 ray.direction = (col.transform.position - transform.position).normalized;
                 ray.origin = ray.GetPoint(frustum.nearClipPlane);
+
+                Hook hook = col.gameObject.GetComponent<Hook>();
+                if(hook != null && hook.currentFish == null)
+                {
+
+                }
+                else { return NodeResult.failure ; }
 
 
                 if (Physics.Raycast(ray, out hit, frustum.farClipPlane, mask))

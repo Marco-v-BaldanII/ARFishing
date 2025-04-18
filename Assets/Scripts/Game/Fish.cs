@@ -24,6 +24,8 @@ public abstract class Fish : MonoBehaviour
     public GameObject exclamation_mark;
     public GameObject particles;
 
+    public FishManager fishManager;
+
     public Fish(Species species)
     {
         this.species = species;
@@ -94,6 +96,11 @@ public abstract class Fish : MonoBehaviour
     private void DeactivateParticles()
     {
         particles.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        fishManager.fish_list.Remove(this);
     }
 
 }

@@ -2,7 +2,8 @@
     "name": "MBehaviourTree",
     "rootNamespace": "",
     "references": [
-        "GUID:b94eb722e14bb88498f76d28e55be3fa"
+        "GUID:b94eb722e14bb88498f76d28e55be3fa",
+        "GUID:54dd396134466aa4f9dcc286a73e5f35"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

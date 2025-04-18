@@ -15,6 +15,11 @@ public class InWaterState : IState
         collider = hook.GetComponent <Collider>();
     }
 
+    public override void Process()
+    {
+        rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, Time.deltaTime);
+    }
+
     public override void OnAreaEnter(Collider other)
     {
         if (other.CompareTag("Fish"))

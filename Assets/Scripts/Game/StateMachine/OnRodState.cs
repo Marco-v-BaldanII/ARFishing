@@ -24,6 +24,9 @@ public class OnRodState : IState
         rigid.useGravity = false; rigid.velocity = Vector3.zero;
         hook.transform.parent = fishing_rod.transform;
         hook.GetComponent<Collider>().enabled = false;
+
+        // Solve glitch
+        hook.fishManager.ResetAllTargets();
     }
 
 }
