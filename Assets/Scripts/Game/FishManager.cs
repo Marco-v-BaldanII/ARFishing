@@ -1,7 +1,6 @@
-using JetBrains.Annotations;
-using System.Collections;
+
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 using MBT;
 
@@ -22,6 +21,7 @@ public class FishManager : MonoBehaviour
             Vector3 pos = Random.insideUnitSphere * spawn_zone_width;
             pos.y = 0;
             fish_list[fish_list.Count - 1].transform.position = pos;
+            fish_list[fish_list.Count - 1].fishManager = this;
         }
     }
 

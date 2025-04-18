@@ -1,6 +1,4 @@
-using Codice.CM.Common;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class InWaterState : IState
