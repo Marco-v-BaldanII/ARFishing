@@ -557,7 +557,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.15
+  m_Radius: 1.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &795265324
 GameObject:
@@ -1001,6 +1001,7 @@ GameObject:
   - component: {fileID: 1194917007}
   - component: {fileID: 1194917009}
   - component: {fileID: 1194917010}
+  - component: {fileID: 1194917011}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Hook
@@ -1072,6 +1073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishing_rod: {fileID: 0}
+  launchVelocity: 3
   currentFish: {fileID: 0}
 --- !u!65 &1194917009
 BoxCollider:
@@ -1111,6 +1113,27 @@ MonoBehaviour:
   pablo: {fileID: 1194917008}
   checkState: 0
   debugSpeed: 0
+--- !u!135 &1194917011
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194917003}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1370768160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1573,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635520814}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fa707a3e96cfa1459c9b055ff5b1e7b, type: 3}
   m_Name: 

@@ -48,6 +48,13 @@ public class Hook : MonoBehaviour
             
             //Debug.DrawLine(transform.position, perpendicularClockwise * 10, Color.yellow);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 launchDirection = fishing_rod.transform.forward + fishing_rod.transform.up * 0.5f;
+            rigid.velocity = launchDirection * launchVelocity;
+        }
+
     }
 
     // Reel in the hook
@@ -58,7 +65,28 @@ public class Hook : MonoBehaviour
         // activate sparkle
     }
 
+    public void StartLaunchRoutine()
+    {
+        StartCoroutine(ApplyLaunchForce());
+    }
 
+    private IEnumerator ApplyLaunchForce()
+    {
+        float launchDuration = 0.1f; // Adjust this duration as needed
+        float elapsedTime = 0f;
+        Vector3 forwardDirection = this.fishing_rod.transform.forward;
+        Vector3 upwardDirection = Vector3.up;
+        float upwardForceFactor = 0.5f;
+        Vector3 launchDirection = (forwardDirection + upwardDirection * upwardForceFactor).normalized;
+        float forceMagnitude = 1.5f; // Your original force magnitude
+
+        while (elapsedTime < launchDuration)
+        {
+            rigid.AddForce(launchDirection * forceMagnitude, ForceMode.Force); // Use ForceMode.Force for continuous application
+            elapsedTime += Time.fixedDeltaTime; // Use FixedDeltaTime for physics updates
+            yield return new WaitForFixedUpdate(); // Wait for the next physics update
+        }
+    }
 }
 
 public enum Direction
