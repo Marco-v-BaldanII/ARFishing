@@ -11,55 +11,58 @@ public class MBT_Wander : Leaf
     public float wanderRadius;
     public float wanderDistance;
     public float wanderJitter;
-
-
     public float movementSpeed = 5;
-
-    private Rigidbody rigid;
-
     public GameObject wander_shpere;
 
-    public float angle = 0;
+    private Rigidbody rigid;
+    private float angle = 0;
+
+    private float startingY;
+    public float yLerpSpeed = 2f;
 
     private void Awake()
     {
-        //home = GetComponentInParent<Collider>();
         rigid = GetComponent<Rigidbody>();
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-        //angle = 0;
+        startingY = transform.position.y;
     }
 
     public override NodeResult Execute()
     {
         float angleOffset = Random.Range(-0.10f, 0.10f);
 
-        Vector3 projection = new Vector3();
-
-        projection.x = Mathf.Cos(angle);
-        projection.z = Mathf.Sin(angle);
-        // these unit circle values work from the origin (0,0)
+        Vector3 projection = new Vector3
+        {
+            x = Mathf.Cos(angle),
+            z = Mathf.Sin(angle)
+        };
 
         projection *= wanderRadius;
-
         angle += angleOffset;
-        // Adding the sphere's pos shifts the vector to start at it
+
         Vector3 endPoint = wander_shpere.transform.position + projection;
 
         Debug.DrawLine(wander_shpere.transform.position, endPoint, Color.red);
 
-        var speed = (endPoint - transform.position).normalized * movementSpeed;
-        rigid.velocity = new Vector3(speed.x, rigid.velocity.y, speed.z);
+        // Smooth Y position
+        float currentY = transform.position.y;
+        float targetY = Mathf.Lerp(currentY, startingY, yLerpSpeed * Time.deltaTime);
 
-        Quaternion targetRotation = Quaternion.LookRotation(rigid.velocity, Vector3.up);
+        Vector3 direction = new Vector3(endPoint.x, targetY, endPoint.z) - transform.position;
+        Vector3 velocity = direction.normalized * movementSpeed;
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 50 * UnityEngine.Time.deltaTime);
+        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
+
+        if (rigid.velocity != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(rigid.velocity.x, 0, rigid.velocity.z), Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 50 * Time.deltaTime);
+        }
 
         return NodeResult.success;
-
     }
-
 }

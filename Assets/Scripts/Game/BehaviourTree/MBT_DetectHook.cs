@@ -31,7 +31,7 @@ public class MBT_DetectHook : Leaf
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(frustum);
         foreach (Collider col in colliders)
         {
-            if (col.CompareTag("Hook") && col.isTrigger == false && GeometryUtility.TestPlanesAABB(planes, col.bounds))
+            if (col.CompareTag("Bait") && col.isTrigger == false && GeometryUtility.TestPlanesAABB(planes, col.bounds))
             {
                 RaycastHit hit;
                 Ray ray = new Ray();
@@ -39,24 +39,13 @@ public class MBT_DetectHook : Leaf
                 ray.direction = (col.transform.position - transform.position).normalized;
                 ray.origin = ray.GetPoint(frustum.nearClipPlane);
 
-                Hook hook = col.gameObject.GetComponent<Hook>();
-                if(hook != null && hook.currentFish == null)
-                {
-
-                }
-                else { 
-                    return NodeResult.failure ; 
-                }
 
 
                 if (Physics.Raycast(ray, out hit, frustum.farClipPlane, mask))
                 {
                     print("Fish has target");
 
-                    if(hit.collider.gameObject.GetComponent<Hook>() == null)
-                    {
-                        return NodeResult.failure ;
-                    }
+ 
 
                     detectTrasnform = hit.collider.transform;
                     break;
@@ -66,8 +55,10 @@ public class MBT_DetectHook : Leaf
 
         }
 
-
-        trs.Value = detectTrasnform;
+        if ( detectTrasnform != null && detectTrasnform.CompareTag("Bait") && detectTrasnform.gameObject.name != "FishingRod")
+        {
+            trs.Value = detectTrasnform;
+        }
         return NodeResult.failure;
     }
 }

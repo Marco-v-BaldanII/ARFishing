@@ -34,14 +34,17 @@ public class FishManager : MonoBehaviour
         }
     }
 
-    public void ResetAllTargets()
+    public void ResetAllTargets(Fish exception)
     {
         foreach (var fish in fish_list)
         {
-            MBT.Blackboard board = fish.GetComponent<MBT.Blackboard>();
-            TransformVariable trs = board.GetVariable<TransformVariable>("target");
-            trs.Value = null;
-            fish.transform.parent = null;
+            if (exception == null || fish != exception)
+            {
+                MBT.Blackboard board = fish.GetComponent<MBT.Blackboard>();
+                TransformVariable trs = board.GetVariable<TransformVariable>("target");
+                trs.Value = null;
+                fish.transform.parent = null;
+            }
         }
     }
 

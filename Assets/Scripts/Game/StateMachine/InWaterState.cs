@@ -34,8 +34,25 @@ public class InWaterState : IState
 
             // Bit by fish -> transition to bitten state
             CallTransition(State.BITTEN, this);
-
+            bitten = true;
         }
+    }
+
+    bool bitten = false;
+
+    public override void Enter()
+    {
+        hook.baitCollider.enabled = true;
+        bitten = false;
+    }
+
+    public override void Exit()
+    {
+        hook.baitCollider.enabled = false;
+
+
+            if ( hook.currentFish != null) hook.fishManager.ResetAllTargets(hook.currentFish);
+        
     }
 }
 

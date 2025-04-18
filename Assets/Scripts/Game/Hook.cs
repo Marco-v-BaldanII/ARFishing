@@ -35,6 +35,8 @@ public class Hook : MonoBehaviour
 
     public Transform point; // point where the hook is when on rod
 
+    public Collider baitCollider;
+
     private void Start()
     {
         machine = GetComponent<HookStateMachine>();
@@ -97,6 +99,7 @@ public class Hook : MonoBehaviour
     {
         if(machine.checkState != State.ON_ROD && machine.checkState != State.THROWN)
         {
+            machine.OnChildTransitionEvent(State.THROWN);
           var distance = Vector3.Distance(transform.position, point.position);
           transform.DOMove(point.transform.position, 0.15f * distance).OnComplete(() => machine.OnChildTransitionEvent(State.ON_ROD));
         }

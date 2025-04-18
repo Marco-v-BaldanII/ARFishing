@@ -20,16 +20,18 @@ public class BittenState : IState
         direction = Direction.None;
     }
 
-    float escape_time = 1.5f; // TODO : replace or involve fish's particular characteristics like strength
+    float escape_time = 4f; // TODO : replace or involve fish's particular characteristics like strength
     public override void Process()
     {
         if (escaping)
         {
+            current_fish.ShowExclamationMark(true);
             escape_time -= Time.deltaTime;
             if(escape_time < 0)
             {
+                _cts.Cancel();
                 GameObject.Destroy(hook.currentFish.gameObject); // Destroy fish , "it escapes"
-                escape_time = 1.5f;
+                escape_time = 4f;
                 CallTransition(State.IN_WATER, this);
             }
         }
@@ -42,9 +44,11 @@ public class BittenState : IState
         current_fish = hook.currentFish;
         direction = Direction.None;
         hook.SetVelocityToRod();
+        escaping = false;
 
         try
         {
+            _cts.Cancel();
             await AttemptBreakFree(_cts.Token);
         }
         catch (TaskCanceledException)
@@ -76,11 +80,12 @@ public class BittenState : IState
         if (direction == Direction.Left)
         {
             Debug.Log("succesfully redirected fisssh");
-            escape_time = 1.5f;
+            escape_time = 3f;
             escaping = false;
             if (current_fish) { current_fish.ShowExclamationMark(false); current_fish.ShowParticles(); }
             hook.SetVelocityToRod();
             rigid.AddForce(rigid.velocity * 2, ForceMode.Impulse);
+            direction = Direction.None;
             try
             {
                 await AttemptBreakFree(_cts.Token);
@@ -97,13 +102,15 @@ public class BittenState : IState
         if (direction == Direction.Right)
         {
             Debug.Log("succesfully redirected fisssh");
-            escape_time = 1.5f;
+            escape_time = 3f;
             escaping = false;
             if (current_fish) { current_fish.ShowExclamationMark(false); current_fish.ShowParticles(); }
             hook.SetVelocityToRod();
             rigid.AddForce(rigid.velocity * 2, ForceMode.Impulse);
+            direction = Direction.None;
             try
             {
+                _cts.Cancel();
                 await AttemptBreakFree(_cts.Token);
             }
             catch (TaskCanceledException)
@@ -117,6 +124,7 @@ public class BittenState : IState
     {
         if (collision.CompareTag("Rod"))
         {
+            _cts.Cancel();
             // Fish catched
             CatchPannel.instance.Show();
             GameObject.Destroy(hook.currentFish.gameObject);

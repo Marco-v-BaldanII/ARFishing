@@ -27,7 +27,7 @@ public class OnRodState : IState
         hook.GetComponent<Collider>().enabled = false;
 
         // Solve glitch
-        hook.fishManager.ResetAllTargets();
+        hook.fishManager.ResetAllTargets(null);
     }
 
 
@@ -35,6 +35,8 @@ public class OnRodState : IState
     {
         hook_pos = hook.point.position;
         hook.transform.position = hook_pos;
+        // Solve glitch
+        hook.fishManager.ResetAllTargets(null);
     }
 
 }

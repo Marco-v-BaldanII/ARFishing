@@ -8,6 +8,7 @@ TagManager:
   - Hook
   - Fish
   - Rod
+  - Bait
   layers:
   - Default
   - TransparentFX
