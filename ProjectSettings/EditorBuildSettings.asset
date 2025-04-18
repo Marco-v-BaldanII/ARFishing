@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Unitilted.unity
     guid: 171b6f8ad9a0d1544b83af672ad54228
+  - enabled: 0
+    path: Assets/Scenes/VibrationTest.unity
+    guid: 9eb43ce6a9ff61f4c89312c55a332bf7
   - enabled: 1
     path: Assets/Scenes/SpaceTracking.unity
     guid: edb0654be1de364409ea0852e90b977a

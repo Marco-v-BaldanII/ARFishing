@@ -23,6 +23,8 @@ public class FishManager : MonoBehaviour
             fish_list[fish_list.Count - 1].transform.position = pos;
             fish_list[fish_list.Count - 1].fishManager = this;
         }
+
+        InvokeRepeating("Vibration", 2f, 2f);
     }
 
     public void ResetAllTargets()
@@ -34,6 +36,12 @@ public class FishManager : MonoBehaviour
             trs.Value = null;
             fish.transform.parent = null;
         }
+    }
+
+    void Vibration()
+    {
+        Handheld.Vibrate();
+
     }
 
 }

@@ -26,6 +26,7 @@ public class Rod : MonoBehaviour
         GyroManager.instance.throw_event.AddListener(ThrowRod);
         hook_pos = hook_object.transform.localPosition;
         machine = hook_object.GetComponent<HookStateMachine>();
+
     }
 
     // Update is called once per frame
@@ -61,6 +62,7 @@ public class Rod : MonoBehaviour
 
     public void ThrowRod()
     {
+        AndroidVibration.Vibrate(500);
         machine.OnChildTransitionEvent(State.THROWN);
     }
 
