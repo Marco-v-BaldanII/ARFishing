@@ -51,6 +51,9 @@ public class HookStateMachine : MonoBehaviour
                 case State.BITTEN:
                     new_state = new BittenState(pablo);
                     break;
+                case State.IN_WATER:
+                    new_state = new InWaterState(pablo);
+                    break;
 
             }
             // each state should subscribe to the OnChild Transition

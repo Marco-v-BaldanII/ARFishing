@@ -915,6 +915,7 @@ GameObject:
   - component: {fileID: 1194917006}
   - component: {fileID: 1194917007}
   - component: {fileID: 1194917009}
+  - component: {fileID: 1194917010}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Hook
@@ -986,6 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishing_rod: {fileID: 0}
+  currentFish: {fileID: 0}
 --- !u!65 &1194917009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1007,6 +1009,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05, y: 0.05, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1194917010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194917003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d957bd9505e92d4a8bb05cd8c114116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateTypes: 00000000010000000200000003000000
+  startingState: 0
+  pablo: {fileID: 1194917008}
+  checkState: 0
+  debugSpeed: 0
 --- !u!1 &1370768160
 GameObject:
   m_ObjectHideFlags: 0

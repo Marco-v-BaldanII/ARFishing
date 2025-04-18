@@ -15,6 +15,7 @@ public class Rod : MonoBehaviour
 
     public Rigidbody hook_object;
     private Vector3 hook_pos;
+    HookStateMachine machine;
 
     private void Start()
     {
@@ -24,13 +25,14 @@ public class Rod : MonoBehaviour
 
         GyroManager.instance.throw_event.AddListener(ThrowRod);
         hook_pos = hook_object.transform.localPosition;
+        machine = hook_object.GetComponent<HookStateMachine>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A)) // manual debug method for throwing hook
         {
             GyroManager.instance.throw_event?.Invoke();
         }
@@ -48,10 +50,7 @@ public class Rod : MonoBehaviour
         Touch a_touch = Input.GetTouch(0);
         if (a_touch.phase != TouchPhase.Ended) { return; }
 
-        hook_object.transform.localPosition = hook_pos;
-        hook_object.useGravity = false; hook_object.velocity = Vector3.zero;
-        hook_object.transform.parent = transform;
-        hook_object.GetComponent<Collider>().enabled = false;
+        machine.OnChildTransitionEvent(State.ON_ROD);
 
     }
 
@@ -62,11 +61,7 @@ public class Rod : MonoBehaviour
 
     public void ThrowRod()
     {
-        hook_object.GetComponent<Collider>().enabled = true;
-
-        hook_object.useGravity = true;
-        hook_object.AddForce(transform.forward  * 1.5f, ForceMode.Impulse);
-        hook_object.transform.parent = null;
+        machine.OnChildTransitionEvent(State.THROWN);
     }
 
 }
