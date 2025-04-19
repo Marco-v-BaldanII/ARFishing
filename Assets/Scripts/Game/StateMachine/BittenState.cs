@@ -126,7 +126,7 @@ public class BittenState : IState
         {
             _cts.Cancel();
             // Fish catched
-            CatchPannel.instance.Show();
+            CatchPannel.instance.Show(hook.currentFish);
             GameObject.Destroy(hook.currentFish.gameObject);
             CallTransition(State.ON_ROD, this);
         }
