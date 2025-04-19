@@ -86,6 +86,12 @@ public class HookStateMachine : MonoBehaviour
     public void OnChildTransitionEvent(State new_state_type)
     {
         if (states == null) { Start(); }
+        // Add scoring logic: award points when transitioning to CATCHED
+        if (new_state_type == State.CATCHED && currentState != states[State.CATCHED])
+        {
+            int scorePerCatch = 10;
+            GameManager.Instance?.IncrementScore(scorePerCatch);
+        }
         OnTransition?.Invoke(pablo, new_state_type);
         currentState?.Exit();
         states[new_state_type]?.Enter();
