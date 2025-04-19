@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public void IncrementScore(int amount)
     {
         score += amount;
+        Debug.Log($"GameManager: Score incremented by {amount}. New score: {score}");
         // Optionally: trigger a score changed event in the future
     }
 } 

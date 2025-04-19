@@ -7,7 +7,16 @@ public class ScoreDisplay : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance != null && scoreText != null)
-            scoreText.text = "Score: " + GameManager.Instance.score;
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("ScoreDisplay: GameManager.Instance is null!");
+            return;
+        }
+        if (scoreText == null)
+        {
+            Debug.LogError("ScoreDisplay: scoreText field is not assigned!");
+            return;
+        }
+        scoreText.text = "Score: " + GameManager.Instance.score;
     }
 } 

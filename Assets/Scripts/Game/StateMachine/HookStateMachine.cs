@@ -89,6 +89,7 @@ public class HookStateMachine : MonoBehaviour
         // Add scoring logic: award points when transitioning to CATCHED
         if (new_state_type == State.CATCHED && currentState != states[State.CATCHED])
         {
+            Debug.Log("HookStateMachine: Transitioning to CATCHED state, attempting to increment score.");
             int scorePerCatch = 10;
             GameManager.Instance?.IncrementScore(scorePerCatch);
         }
