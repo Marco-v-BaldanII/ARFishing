@@ -156,6 +156,75 @@ PrefabInstance:
       propertyPath: spawn_zone_width
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[0].fishName
+      value: Pablo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[1].fishName
+      value: Reginald Jhonson
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[2].fishName
+      value: Gordon McFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[3].fishName
+      value: Richard Discord
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[0].fishPrefab
+      value: 
+      objectReference: {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73,
+        type: 3}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[1].fishPrefab
+      value: 
+      objectReference: {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73,
+        type: 3}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[2].fishPrefab
+      value: 
+      objectReference: {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73,
+        type: 3}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[3].fishPrefab
+      value: 
+      objectReference: {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73,
+        type: 3}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[0].spawnProbability
+      value: 0.046
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[1].spawnProbability
+      value: 0.247
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[2].spawnProbability
+      value: 0.598
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: fishTypes.Array.data[3].spawnProbability
+      value: 0.409
+      objectReference: {fileID: 0}
     - target: {fileID: 3498986838135307914, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: m_LocalPosition.x
