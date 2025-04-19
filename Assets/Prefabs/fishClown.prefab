@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 5401606368433465962}
+  selectedEditorNode: {fileID: 0}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -563,10 +563,10 @@ MonoBehaviour:
   title: Root
   rect:
     serializedVersion: 2
-    x: 240
-    y: 100
+    x: 100
+    y: 60
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 0}
   children:
   - {fileID: 1274549380262533990}
@@ -596,10 +596,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &2700053628044126865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,10 +615,10 @@ MonoBehaviour:
   title: Wander
   rect:
     serializedVersion: 2
-    x: 316.8
-    y: 302.4
+    x: 280
+    y: 200
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 1274549380262533990}
   children: []
   behaviourTree: {fileID: 0}
@@ -629,7 +629,7 @@ MonoBehaviour:
   wanderJitter: 1
   movementSpeed: 0.2
   wander_shpere: {fileID: 3439920700445255638}
-  angle: 360
+  yLerpSpeed: 2
 --- !u!114 &1274549380262533990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,10 +645,10 @@ MonoBehaviour:
   title: Selector
   rect:
     serializedVersion: 2
-    x: 120
-    y: 160
+    x: 100
+    y: 120
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 3091739190359034412}
   children:
   - {fileID: 3816770128545224011}
@@ -707,10 +707,10 @@ MonoBehaviour:
   title: DetectTarget
   rect:
     serializedVersion: 2
-    x: 140
-    y: 260
+    x: 100
+    y: 200
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 1274549380262533990}
   children: []
   behaviourTree: {fileID: 0}
@@ -763,10 +763,10 @@ MonoBehaviour:
   title: Is Set Condition
   rect:
     serializedVersion: 2
-    x: -60
-    y: 240
+    x: -80
+    y: 200
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 1274549380262533990}
   children:
   - {fileID: 5802423439239607354}
@@ -810,9 +810,9 @@ MonoBehaviour:
   rect:
     serializedVersion: 2
     x: -180
-    y: 440
+    y: 360
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 5802423439239607354}
   children: []
   behaviourTree: {fileID: 0}
@@ -838,10 +838,10 @@ MonoBehaviour:
   title: Bite
   rect:
     serializedVersion: 2
-    x: 36.799988
-    y: 482.40002
+    x: 20
+    y: 360
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 5802423439239607354}
   children: []
   behaviourTree: {fileID: 0}
@@ -863,9 +863,9 @@ MonoBehaviour:
   rect:
     serializedVersion: 2
     x: -80
-    y: 320
+    y: 280
     width: 160
-    height: 44
+    height: 45
   parent: {fileID: 3816770128545224011}
   children:
   - {fileID: 2252057007167168322}
