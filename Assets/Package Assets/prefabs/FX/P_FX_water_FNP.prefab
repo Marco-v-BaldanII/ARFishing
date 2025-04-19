@@ -191,39 +191,39 @@ PrefabInstance:
         type: 3}
       propertyPath: fishTypes.Array.data[1].fishPrefab
       value: 
-      objectReference: {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73,
+      objectReference: {fileID: 4408751786103332676, guid: 2a652db1054bdae41afc74de5d46dc26,
         type: 3}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: fishTypes.Array.data[2].fishPrefab
       value: 
-      objectReference: {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73,
+      objectReference: {fileID: 4408751786103332676, guid: 46badabcebe18ca47a7f45b6def87a33,
         type: 3}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: fishTypes.Array.data[3].fishPrefab
       value: 
-      objectReference: {fileID: 4408751786103332676, guid: 981c51c022e78c74f86f8c39d0087a73,
+      objectReference: {fileID: 4408751786103332676, guid: 53258514f92b1c6469c2cf163d815979,
         type: 3}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: fishTypes.Array.data[0].spawnProbability
-      value: 0.046
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: fishTypes.Array.data[1].spawnProbability
-      value: 0.247
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: fishTypes.Array.data[2].spawnProbability
-      value: 0.598
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: fishTypes.Array.data[3].spawnProbability
-      value: 0.409
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3498986838135307914, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
