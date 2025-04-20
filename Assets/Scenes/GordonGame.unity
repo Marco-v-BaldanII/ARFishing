@@ -1898,7 +1898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   gameState: 0
-  gameDuration: 60
+  gameDuration: 10
   currentTime: 0
 --- !u!4 &1113385914
 Transform:
@@ -1933,7 +1933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1123310324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2002,10 +2002,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1123310323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0378ed2dfcbc54b9bb933d119ae864a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 1206c522989994b37a4ce65a0f9e6c85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 1123310323}
   finalScoreText: {fileID: 127557525}
   restartButton: {fileID: 192862224}
 --- !u!1 &1173860045
