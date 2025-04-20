@@ -72,9 +72,9 @@ public class HookStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
+            return;
         currentState?.Process();
-
     }
 
     void FixedUpdate()
@@ -85,6 +85,8 @@ public class HookStateMachine : MonoBehaviour
     // Call sparingly from non-state classes , be careful
     public void OnChildTransitionEvent(State new_state_type)
     {
+        if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
+            return;
         if (states == null) { Start(); }
         // Add scoring logic: award points when transitioning to CATCHED
         if (new_state_type == State.CATCHED && currentState != states[State.CATCHED])

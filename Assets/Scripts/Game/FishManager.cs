@@ -44,6 +44,8 @@ public class FishManager : MonoBehaviour
 
     private void SpawnFish()
     {
+        if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
+            return;
         NormalizeProbabilities();
 
         int fishToSpawn = Random.Range(minFishCount, maxFishCount + 1);
@@ -155,6 +157,8 @@ public class FishManager : MonoBehaviour
 
     public void AddFish(int count)
     {
+        if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
+            return;
         for (int i = 0; i < count; i++)
         {
             GameObject selectedFishPrefab = SelectFishPrefabBasedOnProbability();

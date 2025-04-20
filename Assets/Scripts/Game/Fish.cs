@@ -49,6 +49,8 @@ public abstract class Fish : MonoBehaviour
 
     protected void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
+            return;
         //bool detect = false;
         //Transform detectTrasnform = null;
 
