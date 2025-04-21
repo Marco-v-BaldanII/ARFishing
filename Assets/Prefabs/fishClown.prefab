@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 0}
+  selectedEditorNode: {fileID: 3816770128545224011}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -566,7 +566,7 @@ MonoBehaviour:
     x: 100
     y: 60
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 0}
   children:
   - {fileID: 1274549380262533990}
@@ -596,7 +596,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -618,7 +618,7 @@ MonoBehaviour:
     x: 280
     y: 200
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 1274549380262533990}
   children: []
   behaviourTree: {fileID: 0}
@@ -648,7 +648,7 @@ MonoBehaviour:
     x: 100
     y: 120
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 3091739190359034412}
   children:
   - {fileID: 3816770128545224011}
@@ -710,7 +710,7 @@ MonoBehaviour:
     x: 100
     y: 200
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 1274549380262533990}
   children: []
   behaviourTree: {fileID: 0}
@@ -763,10 +763,10 @@ MonoBehaviour:
   title: Is Set Condition
   rect:
     serializedVersion: 2
-    x: -80
-    y: 200
+    x: -90.399994
+    y: 208.79999
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 1274549380262533990}
   children:
   - {fileID: 5802423439239607354}
@@ -812,7 +812,7 @@ MonoBehaviour:
     x: -180
     y: 360
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 5802423439239607354}
   children: []
   behaviourTree: {fileID: 0}
@@ -841,7 +841,7 @@ MonoBehaviour:
     x: 20
     y: 360
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 5802423439239607354}
   children: []
   behaviourTree: {fileID: 0}
@@ -865,7 +865,7 @@ MonoBehaviour:
     x: -80
     y: 280
     width: 160
-    height: 45
+    height: 44
   parent: {fileID: 3816770128545224011}
   children:
   - {fileID: 2252057007167168322}

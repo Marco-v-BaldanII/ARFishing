@@ -58,13 +58,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        currentTime = 0f;
-        gameState = GameState.GameOver;
-        Debug.Log("Game Over!");
+        //currentTime = 0f;
+        //gameState = GameState.GameOver;
+        //Debug.Log("Game Over!");
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 } 
