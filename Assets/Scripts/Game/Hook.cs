@@ -97,7 +97,7 @@ public class Hook : MonoBehaviour
 
     public void ReelIn(float degrees)
     {
-        if(machine.checkState != State.ON_ROD && machine.checkState != State.THROWN)
+        if(machine.checkState != State.ON_ROD && machine.checkState != State.THROWN && machine.checkState != State.BITTEN)
         {
             machine.OnChildTransitionEvent(State.THROWN);
           var distance = Vector3.Distance(transform.position, point.position);

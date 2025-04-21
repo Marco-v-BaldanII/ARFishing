@@ -89,12 +89,12 @@ public class HookStateMachine : MonoBehaviour
             return;
         if (states == null) { Start(); }
         // Add scoring logic: award points when transitioning to CATCHED
-        if (new_state_type == State.CATCHED && currentState != states[State.CATCHED])
-        {
-            Debug.Log("HookStateMachine: Transitioning to CATCHED state, attempting to increment score.");
-            int scorePerCatch = 10;
-            GameManager.Instance?.IncrementScore(scorePerCatch);
-        }
+        //if (new_state_type == State.CATCHED && currentState != states[State.CATCHED])
+        //{
+        //    Debug.Log("HookStateMachine: Transitioning to CATCHED state, attempting to increment score.");
+        //    int scorePerCatch = 10;
+        //    GameManager.Instance?.IncrementScore(scorePerCatch);
+        //}
         OnTransition?.Invoke(pablo, new_state_type);
         currentState?.Exit();
         states[new_state_type]?.Enter();

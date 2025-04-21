@@ -126,6 +126,7 @@ public class BittenState : IState
         if (collision.CompareTag("Rod"))
         {
             _cts.Cancel();
+            GameManager.Instance?.IncrementScore(10);
             // Fish catched
             CatchPannel.instance.Show(hook.currentFish);
             GameObject.Destroy(hook.currentFish.gameObject);

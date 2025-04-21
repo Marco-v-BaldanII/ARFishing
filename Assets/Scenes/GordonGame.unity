@@ -2231,7 +2231,7 @@ MonoBehaviour:
   gameState: 0
   gameDuration: 60
   currentTime: 0
-  steeringPannel: {fileID: 0}
+  steeringPannel: {fileID: 92740840}
 --- !u!4 &1113385914
 Transform:
   m_ObjectHideFlags: 0
@@ -2342,7 +2342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1173860046
 RectTransform:
   m_ObjectHideFlags: 0
