@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public float currentTime = 0.0f;
 
     public GameObject steeringPannel;
+    public GameObject throwPannel;
 
     private void Awake()
     {
@@ -85,6 +86,18 @@ public class GameManager : MonoBehaviour
         //currentTime = 0f;
         //gameState = GameState.GameOver;
         //Debug.Log("Game Over!");
+    }
+
+    public void ThrowPannel()
+    {
+        throwPannel.SetActive(true);
+        StartCoroutine(ThrowRoutine());
+    }
+
+    private IEnumerator ThrowRoutine()
+    {
+        yield return new WaitForSeconds(3f);
+        throwPannel.SetActive(false);
     }
 
     public void RestartGame()

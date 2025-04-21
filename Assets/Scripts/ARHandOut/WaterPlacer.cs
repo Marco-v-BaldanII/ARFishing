@@ -50,6 +50,7 @@ public class WaterPlacer : MonoBehaviour
             waterPlaced = true;
             fishing_rod.gameObject.SetActive(true);
             waterPanel.SetActive(false);
+            GameManager.Instance.ThrowPannel();
 
             if (plane.alignment == UnityEngine.XR.ARSubsystems.PlaneAlignment.HorizontalUp)
             {
