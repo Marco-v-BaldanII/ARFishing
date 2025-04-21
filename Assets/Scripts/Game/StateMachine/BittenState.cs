@@ -45,6 +45,7 @@ public class BittenState : IState
         direction = Direction.None;
         hook.SetVelocityToRod();
         escaping = false;
+        GameManager.Instance.BlinkTutorial();
 
         try
         {

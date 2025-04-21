@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     public float gameDuration = 60.0f;
     [HideInInspector]
     public float currentTime = 0.0f;
+
+    public GameObject steeringPannel;
 
     private void Awake()
     {
@@ -56,6 +59,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    bool shownTutorial = false;
+
+    public void BlinkTutorial()
+    {
+        if (!shownTutorial)
+        {
+            StartCoroutine(BlinkRoutine());
+            shownTutorial = true;
+        }
+    }
+
+    private IEnumerator BlinkRoutine()
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            yield return new WaitForSeconds(0.2f);
+            steeringPannel.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            steeringPannel.SetActive(false);
+        }
+    }
     public void GameOver()
     {
         //currentTime = 0f;
