@@ -23,26 +23,37 @@ public class CatchPannel : MonoBehaviour
 
         panel.SetActive(false);
     }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            
+            panel.SetActive(true);
+            Clownfish fish = new Clownfish();
+            fish.species = Species.MAGIKARP;
+            Show(fish);
+        }
+    }
 
     public void Show(Fish fish)
     {
         switch (fish.GetSpecies())
         {
             case Species.PABLO:
-                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Fish/RichardDiscord");
-                FishName.GetComponent<Text>().text = "Pablo";
+                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/trout");
+                FishName.GetComponent<TextMeshProUGUI>().text = "Pablo";
                 break;
             case Species.MAGIKARP:
-                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Fish/GordonMcFish");
-                FishName.GetComponent<Text>().text = "Magikarp";
+                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/magikgord");
+                FishName.GetComponent<TextMeshProUGUI>().text = "Magikarp";
                 break;
             case Species.CLOWNNFISH:
-                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Fish/Pablo");
-                FishName.GetComponent<Text>().text = "Clownfish";
+                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/clownfish");
+                FishName.GetComponent<TextMeshProUGUI>().text = "Clownfish";
                 break;
-            case Species.TROUT:
-                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Fish/RegularGeorge");
-                FishName.GetComponent<Text>().text = "Trout";
+            case Species.ABYSSAL:
+                FishImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/lampfish2");
+                FishName.GetComponent<TextMeshProUGUI>().text = "Abyssal";
                 break;
             default:
                 Debug.Log("You re the fish!");
