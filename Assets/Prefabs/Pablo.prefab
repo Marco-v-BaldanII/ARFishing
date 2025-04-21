@@ -2108,6 +2108,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5496739335750987148}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 9040297984350565773}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
         type: 3}
@@ -2161,10 +2165,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5802423439239607354}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 127847572663265828}
   m_SourcePrefab: {fileID: 100100000, guid: 8210c2832cbb43447b5d2663bfa70223, type: 3}
 --- !u!4 &3919495931560363518 stripped
 Transform:
@@ -2178,6 +2178,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3597920586451640853}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5496739335750987148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b5b1db9bae74f4fb5733532b004761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 1073741863
+  exclamation_mark: {fileID: 1428237790413021982}
+  particles: {fileID: 7686738193834218116}
+  fishManager: {fileID: 0}
 --- !u!114 &9040297984350565773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2520,24 +2538,6 @@ MonoBehaviour:
   runtimePriority: 0
   breakpoint: 0
   random: 0
---- !u!114 &127847572663265828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4408751786103332676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad26a0b817b3304d8563ee1166f0c42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mask:
-    serializedVersion: 2
-    m_Bits: 0
-  exclamation_mark: {fileID: 1428237790413021982}
-  particles: {fileID: 7686738193834218116}
-  fishManager: {fileID: 0}
 --- !u!1001 &6725360948136150655
 PrefabInstance:
   m_ObjectHideFlags: 0
