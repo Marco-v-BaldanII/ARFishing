@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public int score = 0;
     public GameState gameState = GameState.Playing;
-    public float gameDuration = 10.0f;
+    public float gameDuration = 60.0f;
     [HideInInspector]
     public float currentTime = 0.0f;
 
