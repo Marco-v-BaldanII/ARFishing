@@ -630,6 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 2
+  species: 2
   mask:
     serializedVersion: 2
     m_Bits: 1073741863
