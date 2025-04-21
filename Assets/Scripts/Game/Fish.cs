@@ -14,7 +14,7 @@ public enum Species
 
 public abstract class Fish : MonoBehaviour
 {
-    protected float movementSpeed;
+    public float movementSpeed;
     protected Species species;
     protected int numberOfActions;
     private Camera frustrum;

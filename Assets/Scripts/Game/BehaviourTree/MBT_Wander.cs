@@ -19,10 +19,12 @@ public class MBT_Wander : Leaf
 
     private float startingY;
     public float yLerpSpeed = 2f;
+    public Fish fish;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        fish = GetComponent<Fish>();
     }
 
     public override void OnEnter()
@@ -55,7 +57,7 @@ public class MBT_Wander : Leaf
         Vector3 direction = new Vector3(endPoint.x, targetY, endPoint.z) - transform.position;
         Vector3 velocity = direction.normalized * movementSpeed;
 
-        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
+        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z) * fish.movementSpeed;
 
         if (rigid.velocity != Vector3.zero)
         {

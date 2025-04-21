@@ -532,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b5b1db9bae74f4fb5733532b004761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 2
   mask:
     serializedVersion: 2
     m_Bits: 1073741863
@@ -603,7 +604,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &2700053628044126865
@@ -636,6 +637,7 @@ MonoBehaviour:
   movementSpeed: 0.2
   wander_shpere: {fileID: 3439920700445255638}
   yLerpSpeed: 2
+  fish: {fileID: 0}
 --- !u!114 &1274549380262533990
 MonoBehaviour:
   m_ObjectHideFlags: 0

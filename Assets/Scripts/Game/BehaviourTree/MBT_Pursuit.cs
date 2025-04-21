@@ -18,11 +18,12 @@ public class MBT_Pursuit : Leaf
     private Blackboard board;
 
     public float speed = 5f;
-
+    Fish fish;
 
     void Awake()
     {
         board = GetComponent<Blackboard>();
+        fish = GetComponent<Fish>();
     }
 
 
@@ -36,7 +37,7 @@ public class MBT_Pursuit : Leaf
 
             Vector3 direction = (targetPos - rigid.transform.position).normalized;
 
-            rigid.velocity = new Vector3(direction.x, direction.y, direction.z) * speed;
+            rigid.velocity = new Vector3(direction.x, direction.y, direction.z) * fish.movementSpeed; ;
             // ARRIVE
             var distance = Vector3.Distance(targetPos, transform.position);
 
