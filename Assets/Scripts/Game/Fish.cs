@@ -86,7 +86,10 @@ public abstract class Fish : MonoBehaviour
     public void ShowExclamationMark(bool show)
     {
         // TODO , replace with tweening
-        exclamation_mark.SetActive(show);
+        if (gameObject)
+        {
+            exclamation_mark?.SetActive(show);
+        }
     }
 
     public void ShowParticles()

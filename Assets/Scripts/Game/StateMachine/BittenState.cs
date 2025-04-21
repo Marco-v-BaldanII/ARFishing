@@ -25,7 +25,7 @@ public class BittenState : IState
     {
         if (escaping)
         {
-            current_fish.ShowExclamationMark(true);
+            current_fish?.ShowExclamationMark(true);
             escape_time -= Time.deltaTime;
             if(escape_time < 0)
             {
@@ -70,7 +70,7 @@ public class BittenState : IState
             if (id == 0) { velocity = new Vector3(-rigid.velocity.z, rigid.velocity.y, rigid.velocity.x).normalized; direction = Direction.Left; }
             else { velocity = new Vector3(rigid.velocity.z, rigid.velocity.y, -rigid.velocity.x).normalized; direction = Direction.Right; }
 
-            if (current_fish) { current_fish.ShowExclamationMark(true); }
+            if (current_fish) { current_fish?.ShowExclamationMark(true); }
             rigid.AddForce(velocity * 2, ForceMode.Impulse);
         escaping = true;
 
@@ -105,7 +105,7 @@ public class BittenState : IState
             Debug.Log("succesfully redirected fisssh");
             escape_time = 3f;
             escaping = false;
-            if (current_fish) { current_fish.ShowExclamationMark(false); current_fish.ShowParticles(); }
+            if (current_fish) { current_fish?.ShowExclamationMark(false); current_fish.ShowParticles(); }
             hook.SetVelocityToRod();
             rigid.AddForce(rigid.velocity * 2, ForceMode.Impulse);
             direction = Direction.None;

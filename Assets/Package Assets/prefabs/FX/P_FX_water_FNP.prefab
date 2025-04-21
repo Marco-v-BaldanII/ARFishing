@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8963451304304168128}
   - component: {fileID: 1506329313675216954}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: P_FX_water_FNP
   m_TagString: Water
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 8963451304790588105}
   - component: {fileID: 8963451304790588108}
   - component: {fileID: 8963451304790588107}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,6 +279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FishManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264917810159468251, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
