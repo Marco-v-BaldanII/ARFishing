@@ -154,12 +154,12 @@ PrefabInstance:
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: maxFishCount
-      value: 35
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
       propertyPath: minFishCount
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
