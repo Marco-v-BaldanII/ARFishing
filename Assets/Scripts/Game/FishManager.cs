@@ -9,8 +9,8 @@ public class FishSpawnInfo
 {
     public GameObject fishPrefab;
     [Range(0f, 1f)]
-    public float spawnProbability = 0.5f; // probabilidad entre 0 y 1, si te pasas se normaliza
-    public string fishName; //EJ: Richard Discord, Gordon McFish, Pablo, Regular George, etc.
+    public float spawnProbability = 0.5f;
+    public string fishName;
 }
 
 public class FishManager : MonoBehaviour
@@ -19,6 +19,10 @@ public class FishManager : MonoBehaviour
     public int minFishCount = 5;
     public int maxFishCount = 15;
     public int spawn_zone_width = 10;
+
+    [Header("Boundary Settings")]
+    public float despawnBoundary = 15f; 
+    public float spawnOffset = 5f;
 
     [Header("Fish Configuration")]
     public FishSpawnInfo[] fishTypes;
@@ -29,23 +33,101 @@ public class FishManager : MonoBehaviour
     public float middleLayerY = -0.5f;
     public float bottomLayerY = -0.9f;
 
-    //para profundidad de los peces si es necesario no lo se
     [Range(0f, 1f)]
     public float topLayerProbability = 0.33f;
     [Range(0f, 1f)]
     public float middleLayerProbability = 0.33f;
-    //la probabilidad de que sea el fondo es 1 - (top + middle)
+
+    private Transform playerCamera;
 
     void Start()
     {
         fish_list = new List<Fish>();
+        playerCamera = Camera.main.transform;
         SpawnFish();
+    }
+
+    void Update()
+    {
+        CheckAndReplaceFish();
+    }
+
+    private void CheckAndReplaceFish()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
+            return;
+
+        List<Fish> fishesToRemove = new List<Fish>();
+
+        foreach (Fish fish in fish_list)
+        {
+            if (fish != null)
+            {
+                float distance = Vector3.Distance(fish.transform.position, playerCamera.position);
+
+                if (distance > despawnBoundary)
+                {
+                    fishesToRemove.Add(fish);
+                }
+            }
+        }
+
+        foreach (Fish fish in fishesToRemove)
+        {
+            fish_list.Remove(fish);
+            Destroy(fish.gameObject);
+            SpawnReplacementFish(1);
+        }
+
+        if (fish_list.Count < minFishCount)
+        {
+            int fishToSpawn = minFishCount - fish_list.Count;
+            SpawnReplacementFish(fishToSpawn);
+        }
+    }
+
+    private void SpawnReplacementFish(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject selectedFishPrefab = SelectFishPrefabBasedOnProbability();
+
+            if (selectedFishPrefab != null)
+            {
+                GameObject fishObject = Instantiate(selectedFishPrefab);
+                Fish fishComponent = fishObject.GetComponent<Fish>();
+                fish_list.Add(fishComponent);
+
+                Vector3 spawnPosition = CalculateSpawnPosition();
+
+                fishComponent.transform.position = spawnPosition;
+                fishComponent.fishManager = this;
+            }
+        }
+    }
+
+    private Vector3 CalculateSpawnPosition()
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2);
+        float distance = Random.Range(despawnBoundary - spawnOffset, despawnBoundary);
+
+        Vector3 offset = new Vector3(
+            Mathf.Cos(angle) * distance,
+            0f,
+            Mathf.Sin(angle) * distance
+        );
+
+        Vector3 position = playerCamera.position + offset;
+        position.y = SelectDepthLayer();
+
+        return position;
     }
 
     private void SpawnFish()
     {
         if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
             return;
+
         NormalizeProbabilities();
 
         int fishToSpawn = Random.Range(minFishCount, maxFishCount + 1);
@@ -77,7 +159,7 @@ public class FishManager : MonoBehaviour
             return null;
         }
 
-        float randomValue = Random.value; 
+        float randomValue = Random.value;
         float cumulativeProbability = 0f;
 
         foreach (FishSpawnInfo fishInfo in fishTypes)
@@ -145,7 +227,7 @@ public class FishManager : MonoBehaviour
     {
         foreach (var fish in fish_list)
         {
-            if (exception == null || fish != exception)
+            if (fish != null && (exception == null || fish != exception))
             {
                 MBT.Blackboard board = fish.GetComponent<MBT.Blackboard>();
                 TransformVariable trs = board.GetVariable<TransformVariable>("target");
@@ -159,22 +241,7 @@ public class FishManager : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
             return;
-        for (int i = 0; i < count; i++)
-        {
-            GameObject selectedFishPrefab = SelectFishPrefabBasedOnProbability();
 
-            if (selectedFishPrefab != null)
-            {
-                GameObject fishObject = Instantiate(selectedFishPrefab);
-                Fish fishComponent = fishObject.GetComponent<Fish>();
-                fish_list.Add(fishComponent); 
-
-                Vector3 pos = Random.insideUnitSphere * spawn_zone_width;
-                pos.y = SelectDepthLayer();
-
-                fishComponent.transform.position = pos;
-                fishComponent.fishManager = this;
-            }
-        }
+        SpawnReplacementFish(count);
     }
 }
