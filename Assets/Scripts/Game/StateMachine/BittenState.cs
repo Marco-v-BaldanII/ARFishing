@@ -26,6 +26,9 @@ public class BittenState : IState
 
     public override void Process()
     {
+
+        Debug.DrawLine(hook.transform.position, rigid.velocity * 10, Color.green);
+
         if (current_fish == null)
         {
             CallTransition(State.IN_WATER, this);
@@ -36,6 +39,7 @@ public class BittenState : IState
         {
             current_fish.ShowExclamationMark(true);
             escape_time -= Time.deltaTime;
+            rigid.velocity = perpendicularVector;
 
             if (escape_time < 0)
             {
@@ -51,11 +55,21 @@ public class BittenState : IState
                 CallTransition(State.IN_WATER, this);
             }
         }
+        else
+        {
+            hook.SetVelocityToRod();
+            if (redirectTimer > 0)
+            {
+                redirectTimer -= Time.deltaTime;
+                rigid.AddForce(rigid.velocity * 2, ForceMode.Impulse);
+            }
+        }
     }
 
     public override void Enter()
     {
         current_fish = hook.currentFish;
+        rigid.constraints = RigidbodyConstraints.FreezePositionY;
 
         if (current_fish == null)
         {
@@ -68,7 +82,7 @@ public class BittenState : IState
         escaping = false;
         GameManager.Instance.BlinkTutorial();
 
-        CancelCurrentTask();
+        //CancelCurrentTask();
         _cts = new CancellationTokenSource();
 
         StartBreakFreeAttempt();
@@ -83,9 +97,10 @@ public class BittenState : IState
 
         AttemptBreakFreeAsync(_cts.Token);
     }
-
+    Vector3 perpendicularVector;
     private async void AttemptBreakFreeAsync(CancellationToken token)
     {
+
         try
         {
             await Task.Delay(Random.Range(1200, 4200), token);
@@ -98,12 +113,12 @@ public class BittenState : IState
 
             if (id == 0)
             {
-                velocity = new Vector3(-rigid.velocity.z, rigid.velocity.y, rigid.velocity.x).normalized;
+                perpendicularVector = new Vector3(-rigid.velocity.z, 0, rigid.velocity.x).normalized * current_fish.movementSpeed * 0.35f;
                 direction = Direction.Left;
             }
             else
             {
-                velocity = new Vector3(rigid.velocity.z, rigid.velocity.y, -rigid.velocity.x).normalized;
+                perpendicularVector = new Vector3(rigid.velocity.z, 0, -rigid.velocity.x).normalized * current_fish.movementSpeed * 0.35f;
                 direction = Direction.Right;
             }
 
@@ -112,7 +127,7 @@ public class BittenState : IState
                 current_fish.ShowExclamationMark(true);
             }
 
-            rigid.AddForce(velocity * 2, ForceMode.Impulse);
+            //rigid.AddForce(velocity * 2, ForceMode.Impulse);
             escaping = true;
         }
         catch (TaskCanceledException)
@@ -140,6 +155,7 @@ public class BittenState : IState
             HandleSuccessfulRedirect();
         }
     }
+    float redirectTimer = 0.8f;
 
     private void HandleSuccessfulRedirect()
     {
@@ -156,7 +172,8 @@ public class BittenState : IState
         }
 
         hook.SetVelocityToRod();
-        rigid.AddForce(rigid.velocity * 2, ForceMode.Impulse);
+        redirectTimer = 0.8f;
+        //rigid.AddForce(rigid.velocity * 16, ForceMode.Impulse);
 
         CancelCurrentTask();
         _cts = new CancellationTokenSource();
@@ -193,6 +210,7 @@ public class BittenState : IState
     public override void Exit()
     {
         CancelCurrentTask();
+        rigid.constraints = RigidbodyConstraints.None;
         escaping = false;
     }
 

@@ -598,6 +598,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5802423439239607354}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8210c2832cbb43447b5d2663bfa70223,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7543469837075277962}
   m_SourcePrefab: {fileID: 100100000, guid: 8210c2832cbb43447b5d2663bfa70223, type: 3}
 --- !u!4 &3919495931560363518 stripped
 Transform:
@@ -833,6 +837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variables:
   - {fileID: 6809049885256297612}
+  - {fileID: 7543469837075277962}
   masterBlackboard: {fileID: 0}
 --- !u!114 &6809049885256297612
 MonoBehaviour:
@@ -863,8 +868,8 @@ MonoBehaviour:
   title: Is Set Condition
   rect:
     serializedVersion: 2
-    x: -90.399994
-    y: 208.79999
+    x: -179.2
+    y: 202.4
     width: 160
     height: 44
   parent: {fileID: 1274549380262533990}
@@ -909,8 +914,8 @@ MonoBehaviour:
   title: Pursuit
   rect:
     serializedVersion: 2
-    x: -180
-    y: 360
+    x: -255.19997
+    y: 432.00003
     width: 160
     height: 44
   parent: {fileID: 5802423439239607354}
@@ -938,8 +943,8 @@ MonoBehaviour:
   title: Bite
   rect:
     serializedVersion: 2
-    x: 20
-    y: 360
+    x: 51.200012
+    y: 468.80002
     width: 160
     height: 44
   parent: {fileID: 5802423439239607354}
@@ -962,8 +967,8 @@ MonoBehaviour:
   title: Selector
   rect:
     serializedVersion: 2
-    x: -80
-    y: 280
+    x: -176.80002
+    y: 320.80002
     width: 160
     height: 44
   parent: {fileID: 3816770128545224011}
@@ -974,6 +979,20 @@ MonoBehaviour:
   runtimePriority: 0
   breakpoint: 0
   random: 0
+--- !u!114 &7543469837075277962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408751786103332676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae15c5e6bcb1714080f2e8296c3d17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: biten
+  val: 0
 --- !u!1001 &6725360948136150655
 PrefabInstance:
   m_ObjectHideFlags: 0

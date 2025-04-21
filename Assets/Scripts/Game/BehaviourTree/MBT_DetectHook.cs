@@ -57,6 +57,7 @@ public class MBT_DetectHook : Leaf
 
         if ( detectTrasnform != null && detectTrasnform.CompareTag("Bait") && detectTrasnform.gameObject.name != "FishingRod")
         {
+            Hook.instance.DeactivateBait(); // multpile fishes dont go for the same
             trs.Value = detectTrasnform;
         }
         return NodeResult.failure;

@@ -87,6 +87,7 @@ public class HookStateMachine : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.gameState != GameState.Playing)
             return;
+        if (new_state_type == checkState) { return; }
         if (states == null) { Start(); }
         // Add scoring logic: award points when transitioning to CATCHED
         //if (new_state_type == State.CATCHED && currentState != states[State.CATCHED])

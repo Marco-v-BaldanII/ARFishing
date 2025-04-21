@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Unitilted.unity
     guid: 171b6f8ad9a0d1544b83af672ad54228
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GordonGame.unity
     guid: edb0654be1de364409ea0852e90b977a
+  - enabled: 1
+    path: Assets/Scenes/GordonGame 1.unity
+    guid: ce2cd27785d10154191bcdd365dc0fa4
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}

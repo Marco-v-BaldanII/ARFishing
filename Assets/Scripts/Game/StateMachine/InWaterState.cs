@@ -20,22 +20,22 @@ public class InWaterState : IState
 
     public override void OnAreaEnter(Collider other)
     {
-        if (other.CompareTag("Fish"))
-        {
-            other.transform.parent = hook.transform;
-           // bitten = true;
-            rigid.useGravity = false;
-            collider.enabled = false;
-           // StartCoroutine(AttemptBreakFree());
-            Fish fish = other.gameObject.GetComponent<Fish>();
-            if (fish) { 
-                hook.currentFish = fish; 
-            }
+        //if (other.CompareTag("Fish"))
+        //{
+        //    other.transform.parent = hook.transform;
+        //   // bitten = true;
+        //    rigid.useGravity = false;
+        //    collider.enabled = false;
+        //   // StartCoroutine(AttemptBreakFree());
+        //    Fish fish = other.gameObject.GetComponent<Fish>();
+        //    if (fish) { 
+        //        hook.currentFish = fish; 
+        //    }
 
-            // Bit by fish -> transition to bitten state
-            CallTransition(State.BITTEN, this);
-            bitten = true;
-        }
+        //    // Bit by fish -> transition to bitten state
+        //    CallTransition(State.BITTEN, this);
+        //    bitten = true;
+        //}
     }
 
     bool bitten = false;

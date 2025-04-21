@@ -11,6 +11,7 @@ public class ThrownState : IState
         hook = pablo;
         rigid = hook.GetComponent<Rigidbody>();
         collider = hook.GetComponentInChildren<BoxCollider>();
+
     }
 
     public override void Enter() {

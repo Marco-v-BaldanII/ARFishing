@@ -36,9 +36,11 @@ public class Hook : MonoBehaviour
     public Transform point; // point where the hook is when on rod
 
     public Collider baitCollider;
+    public static Hook instance;
 
     private void Start()
     {
+        instance = this;
         machine = GetComponent<HookStateMachine>();
         GyroManager.instance.pull_event.AddListener(ReelIn);
     }
@@ -103,6 +105,26 @@ public class Hook : MonoBehaviour
           var distance = Vector3.Distance(transform.position, point.position);
           transform.DOMove(point.transform.position, 0.15f * distance).OnComplete(() => machine.OnChildTransitionEvent(State.ON_ROD));
         }
+    }
+
+    public void Bitten()
+    {
+        bitten = true;
+          rigid.useGravity = false;
+          baitCollider.enabled = false;
+
+        //Fish fish = other.gameObject.GetComponent<Fish>();
+        //if (fish) { 
+        //    hook.currentFish = fish; 
+        //}
+        // Bit by fish -> transition to bitten state
+        machine.OnChildTransitionEvent(State.BITTEN);
+
+    }
+
+    public void DeactivateBait()
+    {
+        baitCollider.enabled = false;
     }
 
 }

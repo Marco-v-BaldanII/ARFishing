@@ -37,7 +37,7 @@ public class MBT_Pursuit : Leaf
 
             Vector3 direction = (targetPos - rigid.transform.position).normalized;
 
-            rigid.velocity = new Vector3(direction.x, direction.y, direction.z) * fish.movementSpeed; ;
+            rigid.velocity = new Vector3(direction.x, direction.y, direction.z).normalized * fish.movementSpeed * 0.4f; 
             // ARRIVE
             var distance = Vector3.Distance(targetPos, transform.position);
 
