@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
-using log4net.Util;
+
 
 public class BittenState : IState
 {
