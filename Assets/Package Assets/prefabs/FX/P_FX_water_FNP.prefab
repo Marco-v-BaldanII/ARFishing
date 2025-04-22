@@ -163,6 +163,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
         type: 3}
+      propertyPath: despawnBoundary
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375887682004023888, guid: 1dfd0253a5b7a0a448fc5e1bd0a1cf9a,
+        type: 3}
       propertyPath: spawn_zone_width
       value: 15
       objectReference: {fileID: 0}

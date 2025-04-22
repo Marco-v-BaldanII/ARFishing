@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using log4net.Util;
 
 public class BittenState : IState
 {
@@ -41,6 +42,8 @@ public class BittenState : IState
             escape_time -= Time.deltaTime;
             rigid.velocity = perpendicularVector;
 
+            current_fish.transform.LookAt(current_fish.transform.position + perpendicularVector);
+
             if (escape_time < 0)
             {
                 CancelCurrentTask();
@@ -57,6 +60,8 @@ public class BittenState : IState
         }
         else
         {
+
+            current_fish.transform.LookAt(Hook.instance.fishing_rod.transform.position);
             hook.SetVelocityToRod();
             if (redirectTimer > 0)
             {

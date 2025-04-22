@@ -1,16 +1,19 @@
 
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class InWaterState : IState
 {
     Hook hook;
     Rigidbody rigid;
     Collider collider;
+    VisualEffect waterSplashEffect;
     public InWaterState(Hook pablo)
     {
         hook = pablo;
         rigid = hook.GetComponent<Rigidbody>();
         collider = hook.GetComponent <Collider>();
+        waterSplashEffect = hook.GetComponentInChildren<VisualEffect>();
     }
 
     public override void Process()
@@ -44,14 +47,23 @@ public class InWaterState : IState
     {
         hook.baitCollider.enabled = true;
         bitten = false;
+        waterSplashEffect.gameObject.SetActive(true);
+        waterSplashEffect.Play();
+        
+    }
+
+    void DeactivateSplash()
+    {
+        waterSplashEffect.gameObject.SetActive(false);
     }
 
     public override void Exit()
     {
         hook.baitCollider.enabled = false;
+        DeactivateSplash();
 
 
-            if ( hook.currentFish != null) hook.fishManager.ResetAllTargets(hook.currentFish);
+        if ( hook.currentFish != null) hook.fishManager.ResetAllTargets(hook.currentFish);
         
     }
 }

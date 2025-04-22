@@ -13,6 +13,8 @@ public class Hook : MonoBehaviour
 
     public float launchVelocity = 3f;
 
+    public AudioClip redirectSfx;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,12 +39,14 @@ public class Hook : MonoBehaviour
 
     public Collider baitCollider;
     public static Hook instance;
+    AudioSource audio;
 
     private void Start()
     {
         instance = this;
         machine = GetComponent<HookStateMachine>();
         GyroManager.instance.pull_event.AddListener(ReelIn);
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -101,10 +105,27 @@ public class Hook : MonoBehaviour
     {
         if(machine.checkState != State.ON_ROD && machine.checkState != State.THROWN && machine.checkState != State.BITTEN)
         {
+            audio.Play();
             machine.OnChildTransitionEvent(State.THROWN);
-          var distance = Vector3.Distance(transform.position, point.position);
-          transform.DOMove(point.transform.position, 0.15f * distance).OnComplete(() => machine.OnChildTransitionEvent(State.ON_ROD));
+            StartCoroutine(DoReel());
+          //var distance = Vector3.Distance(transform.position, point.position);
+          //transform.DOMove(point.transform.position, 0.15f * distance).OnComplete(() => machine.OnChildTransitionEvent(State.ON_ROD));
         }
+    }
+
+    private IEnumerator DoReel()
+    {
+        float t = 0f;
+        var distance = Vector3.Distance(transform.position, point.position);
+        float duration = 0.15f * distance;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+            transform.position = Vector3.Lerp(transform.position, point.position, 0.1f);
+
+            yield return null;
+        }
+        machine.OnChildTransitionEvent(State.ON_ROD);
     }
 
     public void Bitten()
@@ -125,6 +146,14 @@ public class Hook : MonoBehaviour
     public void DeactivateBait()
     {
         baitCollider.enabled = false;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("OutOfBounds"))
+        {
+            machine.OnChildTransitionEvent(State.ON_ROD);
+        }
     }
 
 }

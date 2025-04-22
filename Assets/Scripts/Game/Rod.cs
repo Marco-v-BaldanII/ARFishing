@@ -19,6 +19,7 @@ public class Rod : MonoBehaviour
 
     private Hook hook;
 
+    AudioSource audio;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class Rod : MonoBehaviour
         hook_pos = hook_object.transform.localPosition;
         machine = hook_object.GetComponent<HookStateMachine>();
         hook = hook_object.GetComponent<Hook>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -76,6 +78,7 @@ public class Rod : MonoBehaviour
 
         hook.launchVelocity = degrees / 6.666f;
         print("Force of launch is " + hook.launchVelocity);
+        audio.Play();
 
         if (machine.checkState == State.ON_ROD)
         {

@@ -41,8 +41,11 @@ public class MBT_Bite : Leaf
     public override NodeResult Execute()
     {
 
-        transform.position = Hook.instance.transform.position;
+        //transform.position = Hook.instance.transform.position;
         rigid.constraints = RigidbodyConstraints.FreezeAll;
+
+
+
         //    other.transform.parent = hook.transform;
         //   // bitten = true;
         //    rigid.useGravity = false;
