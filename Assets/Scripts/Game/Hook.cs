@@ -72,7 +72,7 @@ public class Hook : MonoBehaviour
     // Reel in the hook
     public void SetVelocityToRod()
     {
-        rigid.velocity = (fishing_rod.transform.position - transform.position).normalized * SPEED;
+        rigid.velocity = (fishing_rod.transform.position - transform.position).normalized * SPEED * 1.5f;
         rigid.velocity = new Vector3(rigid.velocity.x, 0, rigid.velocity.z);
         // activate sparkle
     }
@@ -105,6 +105,7 @@ public class Hook : MonoBehaviour
     {
         if(machine.checkState != State.ON_ROD && machine.checkState != State.THROWN && machine.checkState != State.BITTEN)
         {
+            fishManager.ResetAllTargets(null);
             audio.Play();
             machine.OnChildTransitionEvent(State.THROWN);
             StartCoroutine(DoReel());

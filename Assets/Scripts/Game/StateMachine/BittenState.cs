@@ -66,7 +66,7 @@ public class BittenState : IState
             if (redirectTimer > 0)
             {
                 redirectTimer -= Time.deltaTime;
-                rigid.AddForce(rigid.velocity * 2, ForceMode.Impulse);
+                rigid.AddForce(rigid.velocity * 3, ForceMode.Impulse);
             }
         }
     }

@@ -75,9 +75,9 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 4; ++i)
         {
-            yield return new WaitForSeconds(0.4f);
-            steeringPannel.SetActive(true);
             yield return new WaitForSeconds(0.1f);
+            steeringPannel.SetActive(true);
+            yield return new WaitForSeconds(0.8f);
             steeringPannel.SetActive(false);
         }
     }
